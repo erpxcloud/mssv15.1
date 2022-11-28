@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_payment_receipt_document" inherit_id="account.report_payment_receipt_document">
+    	<xpath expr="//div[@t-if='o.payment_date']" position="replace">
+    	</xpath>
+    	
+	    <xpath expr="//div[@t-if='o.partner_type']" position="replace">
+	    	<div class="col-6" t-if="o.payment_date">
+                <strong>Payment Date: </strong> <span t-field="o.payment_date"/>
+            </div>
+	    </xpath>
+	    
+	    <xpath expr="//div[hasclass('mb64')]" position="replace">
+	    </xpath>
+	    
+	    <xpath expr="//div[@t-if='o.payment_date']" position="inside">
+	    	<br/>
+	    	<strong>Payment Amount: </strong><span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+	    	<br/>
+	    	<strong>Memo: </strong><span t-field="o.communication"/>
+	    </xpath>
+	    
+	    <xpath expr="//div[hasclass('page')]//h3" position="replace">
+	    	<h3 t-if="o.partner_type == 'customer'"><strong>Receipt: <span t-field="o.name"/></strong></h3>
+	    	<h3 t-if="o.partner_type == 'supplier'"><strong>Payment: <span t-field="o.name"/></strong></h3>
+	    </xpath>
+	    
+    	<xpath expr="//div[hasclass('page')]//h3" position="before">
+    		<link rel="stylesheet" type="text/css" href="/lb_accounting/static/src/css/report_style.css"/>
+    		<style>
+        		body{
+				    font-family: "Times New Roman", Times, serif !important;
+				    color: #000 !important;
+				}
+				
+				h2{
+					margin: 0 !important;
+				}
+				
+				h2, h2 span, h3, h3 span{
+					font-size: 1.625rem !important;
+					color: #000 !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				span, p, label{
+					font-size:11px !important;
+					color: #000 !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				table, table > td, table > th, table > tr{
+					color: #000 !important;
+					font-size:11px !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				.o_total > td{
+					color: #000 !important;
+					background-color: #e9ecef !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				.o_boxed_footer {
+				    margin-top: 0 !important;
+				    white-space: nowrap;
+				    border-top: 1px solid #e9ecef!important;
+				}
+				
+				.o_report_layout_boxed .row > div > table tr:last-child td, .o_report_layout_boxed .row > div > table tr.o_total td, .o_report_layout_boxed div#total table tr:last-child td, .o_report_layout_boxed div#total table tr.o_total td {
+				    background-color: rgba(0, 0, 0, 0.05) !important;
+				    color: #000 !important;
+				    font-weight: bold  !important;
+				}
+				#informations{
+					margin-top: 0 !important;
+					margin-bottom: 0 !important;
+				}
+				.o_report_layout_boxed .row > div > table tr:last-child td, .o_report_layout_boxed .row > div > table tr.o_total td, .o_report_layout_boxed div#total table tr:last-child td, .o_report_layout_boxed div#total table tr.o_total td {
+					    background-color: rgba(0, 0, 0, 0.05) !important;
+					    color: #000 !important;
+					    font-weight: bold  !important;
+				}
+				.mb64{
+	      			margin-bottom: 10px !important;
+	      		}
+	      		
+	      		.mt64{
+	      			margin-top: 0 !important;
+	      		}
+	      		.table{
+	      			margin-top: 5px !important;
+	      		}
+			</style>
+	      	<div id="contact_informations" class="row mt32">
+        		<div class="col-12 mb-2" t-if="o.partner_id.name" name="contact_name">
+        			<div class="d-flex align-items-baseline">
+            			<div class="w-100">
+            				<p class="m-0" t-if="o.partner_id.name">
+	                			<strong t-if="o.partner_type == 'customer'">Customer: </strong> <strong  t-if="o.partner_type == 'supplier'">Vendor: </strong> <span t-field="o.partner_id.display_name" />
+	                		</p>
+	                		<p class="m-0" t-if="o.partner_id.vat">
+	                			<strong><t t-if="o.partner_id.is_vat">VAT#: </t><t t-else="">MOF#: </t> </strong> <span t-field="o.partner_id.vat" />
+	                		</p>
+	                		<p class="m-0">
+		                		<span t-if="o.partner_id.street"><strong>Address:</strong> <span t-if="o.partner_id.street" t-field="o.partner_id.street" /></span>
+		                		<span t-if="o.partner_id.street2">, <span t-field="o.partner_id.street2"></span>, </span>
+		                		<span t-if="o.partner_id.city"><span t-if="o.partner_id.city" t-field="o.partner_id.city"/>, </span>
+		                		<span t-if="o.partner_id.state_id"><span t-field="o.partner_id.state_id"></span>, </span>
+		                		<span t-if="o.partner_id.country_id"><span t-field="o.partner_id.country_id"></span></span>
+		                	</p>
+	                    	<p class="m-0" t-if="o.partner_id.phone"><strong>Tel.: </strong><span t-field="o.partner_id.phone"></span></p>
+	                    	<p class="m-0" t-if="o.partner_id.mobile"><strong>Mobile: </strong><span t-field="o.partner_id.mobile"></span></p>
+	                    	<p class="m-0" t-if="o.partner_id.email"><strong>Email: </strong><span t-field="o.partner_id.email"></span></p>
+	                    	<p class="m-0" t-if="o.partner_id.website"><strong>Website: </strong><span t-field="o.partner_id.website"></span></p>
+            			</div>
+            		</div>
+               </div>
+            </div>
+	    </xpath>
+	    
+	    <xpath expr="//table" position="attributes">
+	        <attribute name="class">table table-sm table-striped</attribute>
+	    </xpath>
+    </template>
+</odoo>

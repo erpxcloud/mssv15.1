@@ -1,0 +1,120 @@
+<odoo noupdate="1">
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_0">
+                <field name="name" >Gross</field>
+                <field name="code" >GROSS</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_1">
+                <field name="name" >Deduction</field>
+                <field name="code" >DED</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_2">
+                <field name="name" >Net</field>
+                <field name="code" >NET</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_3">
+                <field name="name" >Tax Exemption</field>
+                <field name="code" >EXMP</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_4">
+                <field name="name" >Allowances</field>
+                <field name="code" >ALLW</field>
+        </record>
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_5">
+                <field name="name" >Transportation</field>
+                <field name="code" >TRANSP</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_6">
+                <field name="name" >Taxable Total Amount</field>
+                <field name="code" >TAXBLE</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_7">
+                <field name="name" >Basic Salary</field>
+                <field name="code" >BASICSAL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_8">
+                <field name="name" >Income Tax</field>
+                <field name="code" >ITAX</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_9">
+                <field name="name" >Income Tax Layers</field>
+                <field name="code" >ITAXL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_10">
+                <field name="name" >Tax Exemption LBP</field>
+                <field name="code" >EXMPLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_11">
+                <field name="name" >Transportation LBP</field>
+                <field name="code" >TRANSPLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_12">
+                <field name="name" >Income Tax Layers LBP</field>
+                <field name="code" >ITAXLLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_13">
+                <field name="name" >Income Tax LBP</field>
+                <field name="code" >ITAXLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_14">
+                <field name="name" >Taxable Total Amount LBP</field>
+                <field name="code" >TAXBLELL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_15">
+                <field name="name" >Basic Salary LBP</field>
+                <field name="code" >BASICSALLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_16">
+                <field name="name" >Allowances LBP</field>
+                <field name="code" >ALLWLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_17">
+                <field name="name" >Allowances Per Day Or Month</field>
+                <field name="code" >ALLDM</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_18">
+                <field name="name" >NSSF</field>
+                <field name="code" >NSSF</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_19">
+                <field name="name" >NSSF LBP</field>
+                <field name="code" >NSSFLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_20">
+                <field name="name" >Net LBP</field>
+                <field name="code" >NETLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_21">
+                <field name="name" >Gross LBP</field>
+                <field name="code" >GROSSLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_22">
+                <field name="name" >Deduction LBP</field>
+                <field name="code" >DEDLL</field>
+        </record>
+        
+        <record model="hr.salary.rule.category" id="azkatec_src_payroll_23">
+                <field name="name" >Allowances Per Person</field>
+                <field name="code" >ALLP</field>
+        </record>
+</odoo>

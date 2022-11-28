@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="account_move_line_inherit2" model="ir.ui.view">
+            <field name="name">account.move.line.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="second_debit_id" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                    <field name="second_credit_id" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                     <field name="second_balance" invisible="1"/>
+                    <field name="third_debit_id" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                    <field name="third_credit_id" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                    <field name="second_currency" invisible="1"/>
+                    <field name="third_currency" invisible="1"/>
+                     <field name="third_balance" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="account_move_inherit2" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='line_ids']/tree[1]" position="inside">
+                     <field name="second_currency" invisible="1"/>
+                    <field name="third_currency" invisible="1"/>
+                     <field name="second_debit_id" optional="show" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                    <field name="second_credit_id" optional="show" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                    <field name="third_debit_id" optional="show" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                    <field name="third_credit_id" optional="show" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                     <field name="third_balance" optional="show" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                    <field name="second_balance" optional="show" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                </xpath>
+
+            </field>
+        </record>
+        
+        <record id="res_company_inherit" model="ir.ui.view">
+            <field name="name">res.company.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="second_currency"/>
+                    <field name="third_currency"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

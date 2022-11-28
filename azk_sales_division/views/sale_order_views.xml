@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="azk_sales_division_sale_order_view_inherit"
+		model="ir.ui.view">
+		<field name="name">azk_sales_division.sale.order.form.view.inherit</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form" />
+		<field name="arch" type="xml">
+			<field name="user_id" position="before">
+				<field name="division_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			</field>
+		</field>
+	</record>
+</odoo>

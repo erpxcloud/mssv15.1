@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="azk_sale_type_sale_order_view_inherit"
+		model="ir.ui.view">
+		<field name="name">sale.type.sale.order.form.view.inherit</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form" />
+		<field name="arch" type="xml">
+			<field name="sale_order_template_id" position="after">
+				<field name="related_to_transfer" invisible="1"/>
+				<field name="partner_location_demo" invisible="1"/>
+				<field name="sale_order_type"  domain="[('company_id', '=', company_id)]" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_open': True}" />
+				<field name="transfer" domain="[('location_dest_id','=', partner_location_demo),('state','=','done')]" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('related_to_transfer', '=', False)]}" options="{'no_create': True, 'no_open': True}" />
+			</field>
+		</field>
+	</record>
+
+	<record id="view_order_form_inherit_read_only_price_unit" model="ir.ui.view">
+          <field name="name">sale.order.line.tree.read.only.price.unit</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+          <field name="model">sale.order</field>
+          <field name="arch" type="xml">
+              <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="replace">
+				  	<field name="read_only_price_unit" invisible="1"/>
+				  	<field name="price_unit" attrs="{'readonly': [('read_only_price_unit', '==', True)]}"/>
+         	  </xpath>
+	      </field>
+    </record>
+</odoo>

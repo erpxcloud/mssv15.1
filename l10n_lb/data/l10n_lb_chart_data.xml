@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="lebanese_chart_template_standard" model="account.chart.template">
+         <field name="name">Lebanese Chart and Tax Localization</field>
+         <field name="code_digits">8</field>
+         <field name="currency_id" ref="base.LBP" />
+         <field name="bank_account_code_prefix">5112</field>
+         <field name="cash_account_code_prefix">5310</field>
+         <field name="transfer_account_code_prefix">5800</field>
+         <field name="complete_tax_set" eval="True"/>
+     </record>
+</odoo>

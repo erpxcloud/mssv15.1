@@ -1,0 +1,6 @@
+<odoo noupdate="1">
+        <record model="hr.payroll.structure.type" id="hr_payroll_salary_structure_type_lebanese_employee">
+            <field name="name">Lebanese Employee</field>
+            <field name="country_id" eval="ref('base.lb')"></field>
+        </record>
+</odoo>

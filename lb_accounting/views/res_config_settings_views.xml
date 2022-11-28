@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="contact_group_tree_view" model="ir.ui.view">
+			<field name="name">Contact Group</field>
+			<field name="model">lb_accounting.contact_group</field>
+			<field name="arch" type="xml">
+				<tree string="Contact Groups">
+					<field name="name" />
+					<field name="contact_type" />
+					<field name="sequential" />
+					<field name="receivable_code" string="Receivable Code" />
+					<field name="receivable_sequence"
+						string="Receivable Sequence" invisible="1" />
+					<field name="receivable_group" string="Receivable Group" />
+					<field name="receivable_vat_group"
+						string="Receivable VAT Group" />
+					<field name="payable_code" string="Payable Code" />
+					<field name="payable_sequence" string="Payable Sequence"
+						invisible="1" />
+					<field name="payable_group" string="Payable Group" />
+					<field name="payable_vat_group" string="Payable VAT Group" />
+					<field name="company_id" options="{'no_create': True}"
+						groups="base.group_multi_company" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="contact_group_search" model="ir.ui.view">
+			<field name="name">lb_accounting.contact_group_search_form</field>
+			<field name="model">lb_accounting.contact_group</field>
+			<field name="arch" type="xml">
+				<search string="Contact Group">
+					<field name="name" />
+					<field name="receivable_code" />
+					<field name="payable_code" />
+				</search>
+			</field>
+		</record>
+
+		<record id="contact_group_form" model="ir.ui.view">
+			<field name="name">contact.group.form</field>
+			<field name="model">lb_accounting.contact_group</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Contact Group">
+					<sheet string="Contact Group">
+						<group>
+							<group>
+								<field name="name" string="Name" />
+							</group>
+							<group>
+								<field name="sequential" string="Sequential"
+									context="{'default_sequential': True}" />
+							</group>
+							<group>
+								<field name="contact_type" required="1" />
+							</group>
+							<group>
+								<field name="company_id" options="{'no_create': True}"
+									groups="base.group_multi_company" />
+							</group>
+						</group>
+						<group>
+							<group attrs="{'invisible': [('contact_type','!=','customer')]}">
+								<field name="receivable_code" string="Receivable Code" />
+								<field name="receivable_sequence"
+									string="Receivable Sequence" invisible="1" />
+								<field name="receivable_sequence_next"
+									string="Next Receivable Sequence" />
+								<field name="receivable_group" string="Receivable Group"
+									attrs="{'invisible': [('sequential','=',False)]}"
+									options="{'no_create_edit': True}" />
+								<field name="receivable_vat_group"
+									string="Receivable VAT Group"
+									attrs="{'invisible': [('sequential','=',False)]}"
+									options="{'no_create_edit': True}" />
+								<field name="receivable_account"
+									string="Receivable Account"
+									attrs="{'invisible': [('sequential','!=',False)]}"
+									context="{'default_reconcile': True, 'default_user_type_id' : 1, 'default_deprecated': False}" />
+								<field name="receivable_vat_account"
+									string="Receivable VAT Account"
+									attrs="{'invisible': [('sequential','!=',False)]}"
+									context="{'default_reconcile': True, 'default_user_type_id' : 9, 'default_deprecated': False}" />
+							</group>
+							<group attrs="{'invisible': [('contact_type','!=','vendor')]}">
+								<field name="payable_code" string="Payable Code" />
+								<field name="payable_sequence" string="Payable Sequence"
+									invisible="1" />
+								<field name="payable_sequence_next"
+									string="Next Payable Sequence" />
+								<field name="payable_group" string="Payable Group"
+									attrs="{'invisible': [('sequential','=',False)]}"
+									options="{'no_create_edit': True}" />
+								<field name="payable_vat_group" string="Payable VAT Group"
+									attrs="{'invisible': [('sequential','=',False)]}"
+									options="{'no_create_edit': True}" />
+								<field name="payable_account" string="Payable Account"
+									attrs="{'invisible': [('sequential','!=',False)]}"
+									context="{'default_reconcile': True, 'default_user_type_id' : 2, 'default_deprecated': False}" />
+								<field name="payable_vat_account"
+									string="Payable VAT Account"
+									attrs="{'invisible': [('sequential','!=',False)]}"
+									context="{'default_reconcile': True, 'default_user_type_id' : 9, 'default_deprecated': False}" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="contact_group_form_action"
+			model="ir.actions.act_window">
+			<field name="name">Contact Groups</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">lb_accounting.contact_group</field>
+			<field name="view_id" ref="contact_group_tree_view" />
+			<field name="search_view_id" ref="contact_group_search" />
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click to add a contact group
+				</p>
+			</field>
+		</record>
+
+		<menuitem parent="account.account_account_menu"
+			id="menu_contact_group_form_action"
+			action="contact_group_form_action" />
+
+		<record id="account_accountant_res_config_settings_view_form_inherited" model="ir.ui.view">
+			<field name="name">res.config.settings.view.form.inherit.account.accountant.inherit</field>
+			<field name="model">res.config.settings</field>
+			<field name="inherit_id" ref="account_accountant.res_config_settings_view_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//div[@id='bank_cash']" position="after">
+					<h2>Lebanese Accounting</h2>
+					<div class="row mt16 o_settings_container">
+						<field name="module_account_accountant" invisible="1" />
+
+
+						<div class="col-12 col-lg-6 o_setting_box"
+							attrs="{'invisible': [('chart_template_id','=',False), ('module_account_accountant','=',False)]}">
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane">
+								<span class="o_form_label">Contact Groups</span>
+								<div class="text-muted">
+									Configure your contact groups
+								</div>
+								<div class="content-group">
+									<div class="row mt16">
+										<label for="use_contact_group"
+											class="col-lg-3 o_light_label" />
+										<field name="use_contact_group"
+											string="Use Contact Group" />
+									</div>
+									<div class="row mt16">
+										<button name="%(contact_group_form_action)d"
+											icon="fa-arrow-right" type="action" string="Contact Groups"
+											class="btn-link" style="padding:0.375rem 0.75rem;"
+											attrs="{'invisible': [('use_contact_group','=',False)]}"
+											/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-lg-6 o_setting_box"
+							attrs="{'invisible': [('chart_template_id','=',False), ('module_account_accountant','=',False)]}">
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane">
+								<span class="o_form_label">Temporary Accounts</span>
+								<div class="text-muted">
+									Specify the temporary accounts
+								</div>
+								<div class="content-group">
+									<div class="row mt16">
+										<label for="temporary_receivable_account"
+											class="col-lg-3 o_light_label" />
+										<field name="temporary_receivable_account"
+											context="{'default_reconcile': True, 'default_user_type_id' : 1, 'default_deprecated': False}"
+											string="Temporary Receivable" />
+									</div>
+									<div class="row mt16">
+										<label for="temporary_payable_account"
+											class="col-lg-3 o_light_label" />
+										<field name="temporary_payable_account"
+											context="{'default_reconcile': True, 'default_user_type_id' : 2, 'default_deprecated': False}"
+											string="Temporary Payable" />
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-xs-12 col-md-6 o_setting_box" />
+	                    
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane"/>
+	                        <div class="o_setting_right_pane">
+	                            <label for="say_of_default_currency"/>
+	                            <div class="text-muted">
+	                                Total amount counter value in local currency
+	                            </div>
+	                            <field name="say_of_default_currency" string="Total Amount Local Currency" />
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane"/>
+	                        <div class="o_setting_right_pane">
+	                            <label for="tax_say_of_default_currency"/>
+	                            <div class="text-muted">
+	                                Tax amount counter value in local currency
+	                            </div>
+	                            <field name="tax_say_of_default_currency" string="Tax Amount Local Currency"/>
+	                        </div>
+	                    </div>
+	                    
+	  				</div>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+			<field name="name">res.config.settings.view.form.inherit.base.setup.inherit</field>
+			<field name="model">res.config.settings</field>
+			<field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+			<field name="arch" type="xml">
+					<xpath expr="//div[@id='business_documents']/div[hasclass('o_settings_container')]" position="inside">
+						<style>
+	                		.o_form_view.o_company_document_layout img[name="footer_logo"] {
+							    max-height: 100px;
+							    max-width: 300px;
+							}
+	                	</style>
+                	
+						<div class="col-12 col-lg-6 o_setting_box">
+		                    <div class="o_setting_right_pane">
+		                        <span class="o_form_label">Letter Head Template</span>
+		                        <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+		                        <div class="text-muted">
+		                            Choose your letter head's header and footer layout
+		                        </div>
+		                        <div class="content-group">
+		                            <div class="mt16" groups="base.group_no_one">
+		                                <label for="external_letter_head_report_layout_id" string="Template" class="col-3 col-lg-3 o_light_label"/>
+		                                <field name="external_letter_head_report_layout_id" domain="[('type','=', 'qweb')]" class="oe_inline"/>
+		                            </div>
+		                            <div class="mt16">
+		                                <button name="change_report_letter_head_template" string="Change Document Template" type="object" class="oe_link" icon="fa-arrow-right"/>
+		                                <button name="edit_letter_external_header" string="Edit Layout" type="object" class="oe_link" groups="base.group_no_one"/>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+					</xpath>
+			</field>
+		</record>
+		
+	</data>
+</odoo>

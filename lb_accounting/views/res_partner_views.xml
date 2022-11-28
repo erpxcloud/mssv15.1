@@ -1,0 +1,53 @@
+<odoo>
+	<data>
+		<record id="account_view_partner_property_form_inherited"
+			model="ir.ui.view">
+			<field name="name">account.view.partner.property.form.inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id"
+				ref="account.view_partner_property_form" />
+			<field name="arch" type="xml">
+				<field name="vat" position="after">
+					<field name="is_vat" invisible="1" />
+					<field name="official_name" invisible="1" />
+				</field>
+				<xpath expr="//group[@name='sale']//field[@name='user_id']"
+					position="before">
+					<field name="has_account_group" invisible="1" />
+					<field name="use_contact_group" invisible="1" />
+					<field string="Customer Group" name="contact_group"
+						groups="account.group_account_user"
+						attrs="{'readonly': [('has_account_group', '=', True)], 'invisible': ['|','&amp;',('is_company','=',False),('parent_id','!=',False),('use_contact_group' ,'=' , False)]}"
+						context="{'default_contact_type': 'customer'}" />
+					<field string="Customer ID" name="customer_id" readonly="1" />
+				</xpath>
+
+				<xpath
+					expr="//group[@name='purchase']//field[@name='property_supplier_payment_term_id']"
+					position="before">
+					<field name="has_account_vendor_group" invisible="1" />
+					<field name="use_contact_group" invisible="1" />
+					<field string="Vendor Group" name="vendor_group"
+						groups="account.group_account_user"
+						attrs="{'readonly': [('has_account_vendor_group', '=', True)], 'invisible': ['|','&amp;',('is_company','=',False),('parent_id','!=',False),('use_contact_group' ,'=' , False)]}"
+						context="{'default_contact_type': 'vendor'}" />
+					<field string="Vendor ID" name="supplier_id" readonly="1" />
+				</xpath>
+                <xpath expr="//group[@name='accounting_entries']//field[@name='property_account_payable_id']" position="after">
+                    <field name="use_contact_group" invisible="1" />
+                    <field name="vat_receivable"
+						groups="account.group_account_user"
+						attrs="{'invisible': ['|','&amp;',('is_company','=',False),('parent_id','!=',False),('use_contact_group' ,'=' , False)]}"/>
+                        <field name="vat_payable"
+						groups="account.group_account_user"
+						attrs="{'invisible': ['|','&amp;',('is_company','=',False),('parent_id','!=',False),('use_contact_group' ,'=' , False)]}"/>
+                </xpath>
+                
+                
+
+			</field>
+		</record>
+      
+        
+	</data>
+</odoo>

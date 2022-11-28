@@ -1,0 +1,279 @@
+<odoo>
+	<data>
+		<template id="company_financial">
+	         <div class="row mb8">
+				<div class="col-12 text-left">
+              		<ul class="list-inline" style="margin:0">
+	                    <li t-if="company.company_registry" class="list-inline-item">
+	                    	<t t-if="company.commercial_reg_label">
+	                    		<strong><span t-field="company.commercial_reg_label"></span>:</strong>  
+	                    	</t>
+	                    	<t t-else="">
+	                    		<strong><span>Commercial Reg:</span></strong>
+	                    	</t>
+	                    	<strong><span t-field="company.company_registry" /></strong>
+	                    </li>
+	                </ul>
+	                <ul class="list-inline">
+	                    <li t-if="company.capital" class="list-inline-item">
+	                    	<t t-if="company.capital_label">
+	                    		<strong><span t-field="company.capital_label"></span>:</strong>
+	                    	</t>
+	                    	<t t-else="">
+	                    		<strong><span>Capital</span></strong>
+	                    	</t>
+	                    	<strong><span t-field="company.capital" /></strong>
+	                    	<strong><span t-if="company.capital and company.vat">|</span></strong>
+	                    </li>
+	                    <li t-if="company.vat" class="list-inline-item">
+	                    	<t t-if="company.vat_label">
+	                    		<strong><span t-field="company.vat_label" /></strong>
+	                    	</t>
+	                    	<t t-else="">
+	                    		<strong><span> VAT #</span></strong>
+	                    	</t>
+	                    	<strong><span t-field="company.vat" /></strong>
+	                    </li>
+	                </ul>
+              	</div>
+             </div>
+	    </template>
+	    
+		<template id="slogan_layout">
+	         <div class="row mb8">
+				<div class="col-12 text-right">
+              		<h3 t-if="company.report_header" style="color:#000"><strong><span t-esc="company.report_header"></span></strong></h3>
+              	</div>
+             </div>
+	    </template>
+	    
+	    <template id="footer_logo">
+	        <div class="row mt8 mb8">
+				<div class="col-12 text-right">
+					<img t-if="company.footer_logo" t-att-src="image_data_uri(company.footer_logo)" alt="Footer Logo"  height="250"/>
+              	</div>
+             </div>
+	    </template>
+	    
+		<template id="external_layout_lebanese">
+	        <div class="header">
+	        	<link rel="stylesheet" type="text/css" href="/lb_accounting/static/src/css/report_style.css"/>
+	        	<style>
+	        		body{
+					    font-family: "Times New Roman", Times, serif !important;
+					    color: #000 !important;
+					}
+					
+					h2{
+						margin: 0 !important;
+					}
+					
+					h2, h2 span, h3, h3 span{
+						font-size: 1.625rem !important;
+						color: #000 !important;
+						font-family: "Times New Roman", Times, serif !important;
+					}
+					
+					span, p, label{
+						color: #000 !important;
+						font-family: "Times New Roman", Times, serif !important;
+					}
+				</style>
+	            <div class="o_boxed_header">
+		            <div class="row mb8">
+		                <div class="col-6">
+		                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"  height="120"/>
+		                    <ul class="list-inline" style="margin:0">
+			                    <li t-if="company.company_registry" class="list-inline-item">
+			                    	<t t-if="company.commercial_reg_label">
+			                    		<span t-field="company.commercial_reg_label"></span>:  
+			                    	</t>
+			                    	<t t-else="">
+			                    		<span>Commercial Reg:</span>
+			                    	</t>
+			                    	<span t-field="company.company_registry" />
+			                    </li>
+			                </ul>
+			                <ul class="list-inline">
+			                    <li t-if="company.capital" class="list-inline-item">
+			                    	<t t-if="company.capital_label">
+			                    		<span t-field="company.capital_label"></span>:  
+			                    	</t>
+			                    	<t t-else="">
+			                    		<span>Capital</span>
+			                    	</t>
+			                    	<span t-field="company.capital" /> 
+			                    	<span t-if="company.capital and company.vat">|</span>
+			                    </li>
+			                    <li t-if="company.vat" class="list-inline-item">
+			                    	<t t-if="company.vat_label">
+			                    		<span t-field="company.vat_label" />
+			                    	</t>
+			                    	<t t-else="">
+			                    		<span> VAT #</span>
+			                    	</t>
+			                    	<span t-field="company.vat" />
+			                    </li>
+			                </ul>
+		                </div>
+		                <div class="col-6 text-right mb4">
+		                    <div name="company_address" class="mb4">
+	                            <h4 t-if="company.name" t-field="company.name" style="text-transform: capitalize; color: #000" />
+	                    		<p class="m-0"> 
+	                    			<span t-if="company.street" t-field="company.street" />
+	                    			<span t-if="company.street2">, <span t-field="company.street2"/></span>
+	                    		</p>
+	                    		<p class="m-0">
+	                    			<span t-if="company.city" t-field="company.city" />
+	                    			<span t-if="company.state_id">, <span t-field="company.state_id"/></span>
+	                    			<span t-if="company.country_id">, <span t-field="company.country_id"></span></span>
+	                    		</p>
+	                        	<p class="m-0">
+	                        		<span t-if="company.phone">Tel.: <span t-field="company.phone"></span></span>
+	                        		<span t-if="company.fax">, Fax: <span t-field="company.fax"></span></span>
+	                        	</p>
+	                        	<p class="m-0" t-if="company.email">Mail: <span t-field="company.email"/></p>
+	                    		<p class="m-0" t-if="company.website">Web: <span t-field="company.website"/></p>
+		                    </div>
+		                </div>
+		            </div>
+	            </div>
+	        </div>
+	
+	        <div class="article o_report_layout_boxed"  style="min-height: 260px;" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+	            <t t-call="lb_accounting.slogan_layout"/>
+	            <t t-call="web.address_layout"/>
+	            <t t-raw="0"/>
+	            <t t-call="lb_accounting.footer_logo"/>
+	        </div>
+	
+	        <div class="footer o_boxed_footer" style="margin-top: 0 !important; border-top: 1px solid #e9ecef!important;">
+	            <div class="text-center">
+	            	<t t-if="company.report_footer">
+	                	<div t-field="company.report_footer"/>
+	                	<hr/>
+	                </t>
+	                <div t-if="report_type == 'pdf'">
+	                    Page: <span class="page"/> / <span class="topage"/>
+	                </div>
+	            </div>
+	        </div>
+	    </template>
+	    
+	    <template id="external_layout_lebanese_center">
+	        <div class="header">
+	        	<link rel="stylesheet" type="text/css" href="/lb_accounting/static/src/css/report_style.css"/>
+	        	<style>
+	        		body{
+					    font-family: "Times New Roman", Times, serif !important;
+					    color: #000 !important;
+					}
+					
+					h2{
+						margin: 0 !important;
+					}
+					
+					h2, h2 span, h3, h3 span{
+						font-size: 1.625rem !important;
+						color: #000 !important;
+						font-family: "Times New Roman", Times, serif !important;
+					}
+					
+					span, p, label{
+						color: #000 !important;
+						font-family: "Times New Roman", Times, serif !important;
+					}
+				</style>
+	            <div class="o_boxed_header">
+		            <div class="row mb8">
+		                <div class="col-12">
+	                    	<div class="text-center">
+	                    		<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"  height="120"/>
+	                    	</div>
+		          			<ul class="list-inline" style="margin:0">
+			                    <li t-if="company.company_registry" class="list-inline-item">
+			                    	<t t-if="company.commercial_reg_label">
+			                    		<span t-field="company.commercial_reg_label"></span>:  
+			                    	</t>
+			                    	<t t-else="">
+			                    		<span>Commercial Reg:</span>
+			                    	</t>
+			                    	<span t-field="company.company_registry" />
+			                    </li>
+			                </ul>
+			                <ul class="list-inline">
+			                    <li t-if="company.capital" class="list-inline-item">
+			                    	<t t-if="company.capital_label">
+			                    		<span t-field="company.capital_label"></span>:  
+			                    	</t>
+			                    	<t t-else="">
+			                    		<span>Capital</span>
+			                    	</t>
+			                    	<span t-field="company.capital" /> 
+			                    	<span t-if="company.capital and company.vat">|</span>
+			                    </li>
+			                    <li t-if="company.vat" class="list-inline-item">
+			                    	<t t-if="company.vat_label">
+			                    		<span t-field="company.vat_label" />
+			                    	</t>
+			                    	<t t-else="">
+			                    		<span> VAT #</span>
+			                    	</t>
+			                    	<span t-field="company.vat" />
+			                    </li>
+			                </ul>
+		          		</div>
+		            </div>
+	            </div>
+	        </div>
+	
+	        <div class="article o_report_layout_boxed" style="min-height: 260px;" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+	            <t t-call="lb_accounting.slogan_layout"/>
+	            <t t-call="web.address_layout"/>
+	            <t t-raw="0"/>
+	            <t t-call="lb_accounting.footer_logo"/>
+	        </div>
+			
+			<div class="footer o_boxed_footer" style="margin-top: 0 !important; border-top: 1px solid #e9ecef!important;">
+	            <div class="text-center mb4">
+	                <p style="margin:0">    
+	                	<span t-if="company.street" t-field="company.street" />
+                   		<span t-if="company.street2">, <span t-field="company.street2"></span></span>
+                   		<span t-if="company.city">, <span t-field="company.city" /></span>
+                   		<span t-if="company.state_id">, <span t-field="company.state_id"></span></span>
+                   		<span t-if="company.country_id">, <span t-field="company.country_id"></span></span>
+                   	</p>
+                   	<p style="margin:0"> 
+                       	<span t-if="company.phone">Tel.: <span t-field="company.phone"></span></span>
+                       	<span t-if="company.fax">, Fax: <span t-field="company.fax"></span></span>
+                       	<span t-if="company.email">, Mail: <span t-field="company.email"/></span>
+                   		<span t-if="company.website">, Web: <span t-field="company.website"/></span>
+					</p>
+	                
+	               	<t t-if="company.report_footer">
+	                	<div t-field="company.report_footer"/>
+	                	<hr/>
+	                </t>
+	                <div t-if="report_type == 'pdf'">
+	                    Page: <span class="page"/> / <span class="topage"/>
+	                </div>
+	            </div>
+	        </div>
+	    </template>
+	    
+	    <template id="external_layout_letter_head">
+	    	<div class="header"></div>
+		    <div class="article o_report_layout_boxed" style="min-height: 260px;" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+		        <link rel="stylesheet" type="text/css" href="/lb_accounting/static/src/css/report_style.css"/>
+		        
+		        <t t-call="lb_accounting.company_financial"/>
+		        <t t-call="lb_accounting.slogan_layout"/>
+	            <t t-call="web.address_layout"/>
+	            <t t-raw="0"/>
+	            <t t-call="lb_accounting.footer_logo"/>
+	            
+		    </div>
+		    <div class="footer" style="margin-top: 0 !important"></div>
+	    </template>
+	</data>
+</odoo>

@@ -1,0 +1,17 @@
+code,name,id,user_type_id,group_id
+42100001,Payments Due To Personnel,azkatech_coa_lb_1,Current Liabilities,Payments Due To Personnel
+42820001,Employees,azkatech_coa_lb_2,Current Liabilities,Retentions
+43181001,CNSS Cotisation Medical Employer (9%),azkatech_coa_lb_3,Current Liabilities,CNSS Cotisation Medical (7%+3%)
+43181002,CNSS Cotisation Medical Employee (3%),azkatech_coa_lb_4,Current Liabilities,CNSS Cotisation Medical (7%+3%)
+43182001,CNSS Cotisation Indemnity End Of Service (8.5%),azkatech_coa_lb_5,Current Liabilities,CNSS Cotisation Indemnity End Of Service (8.5%)
+43183001,CNSS Cotisation Familly Alocation (6%),azkatech_coa_lb_6,Current Liabilities,CNSS Cotisation Familly Alocation (6%)
+43810001,Family Allocation For Personnel,azkatech_coa_lb_7,Current Liabilities,Family Allocation For Personnel
+44110001,Taxes On Salary,azkatech_coa_lb_8,Current Liabilities,Taxes Due (Operational)
+63110001,Salaries,azkatech_coa_lb_9,Expenses,Salaries
+63130001,School Allowance,azkatech_coa_lb_10,Expenses,School Aid
+63150001,Transporation,azkatech_coa_lb_11,Expenses,Transport Of Personnel
+63510001,CNSS Cotisation Medical Employer (9%),azkatech_coa_lb_12,Expenses,CNSS Cotisation Medicla (Employer 7%)
+63520001,CNSS Cotisation Indemnity End Of Service (8.5%),azkatech_coa_lb_13,Expenses,CNSS Cotisation Indemnity End Of Service (8.5%)
+63530001,CNSS Cotisation Familly Allocation (6%),azkatech_coa_lb_14,Expenses,CNSS Cotisation Familly Allocation (6%)
+67510001,DEX Loss,azkatech_coa_lb_15,Expenses,Normal Operations
+77510001,DEX Profit,azkatech_coa_lb_16,Income,Current Operations

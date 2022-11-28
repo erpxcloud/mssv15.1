@@ -1,0 +1,41 @@
+<odoo noupdate="1">
+        <record model="res.partner" id="azkatec_contrib_register_exemption">
+            <field name="name">Exemption</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_employees">
+            <field name="name">Employees</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_employer">
+            <field name="name">Employer</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_employee">
+            <field name="name">Employee</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_house_rent_allowance">
+            <field name="name">House Rent Allowance Register</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_provident_fund_register">
+            <field name="name">Provident Fund Register</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_professional_tax_register">
+            <field name="name">Professional Tax Register</field>
+            <field name="type">contact</field>
+        </record>
+        
+        <record model="res.partner" id="azkatec_contrib_register_meal_voucher_register">
+            <field name="name">Meal Voucher Register</field>
+            <field name="type">contact</field>
+        </record>
+</odoo>

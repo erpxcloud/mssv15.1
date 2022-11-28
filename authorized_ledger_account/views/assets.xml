@@ -1,0 +1,10 @@
+<odoo>
+	<data>
+		<template id="assets_backend" name="helpdesk assets" inherit_id="web.assets_backend">
+		    <xpath expr="." position="inside">
+		    	<link rel="stylesheet" type="text/scss" href="/authorized_ledger_account/static/src/scss/table_headers.scss"/>
+		        <script type="text/javascript" src="/authorized_ledger_account/static/src/js/account_report_js.js"></script>
+		    </xpath>
+		</template>
+	</data>
+</odoo>

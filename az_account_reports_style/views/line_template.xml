@@ -1,0 +1,39 @@
+<odoo>
+	<template id="lb_line_template_inherit" inherit_id="account_reports.line_template">
+			<xpath expr="//t[@t-as='line']//tr[1]//td[1]" position="attributes">
+				 <attribute name="t-att-style">'vertical-align: top ;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; '</attribute>
+		    </xpath>
+		    
+			<xpath expr="//div[@class='dropdown']" position="attributes">
+				 <attribute name="class">''</attribute>
+			</xpath>
+		  
+		  	<xpath expr="//t[@t-as='line']/tr[1]//t[@t-as='column']//td" position="attributes">
+		  		<attribute name="t-att-style">column.get('style', lines.get('columns_header')[-1][column_index+line.get('colspan', 1)].get('style', '')) + ' ;   vertical-align: top; white-space: normal;  padding: 0px; overflow-wrap: break-word !important;'</attribute>
+		  	</xpath>
+		   
+		     <xpath expr="//t[@t-as='line']/tr[1]//t[@t-as='column']//td" position="inside">
+			     <t t-if="context.get('print_mode') == True and model and model._name == 'account.financial.html.report'">
+				     <style>
+					     .number{
+					     	width: 20% !important;
+					     }
+				     </style>
+			     </t>
+			     <t t-elif="context.get('print_mode') == True">
+				     <style>
+					     .number{
+					     	width: 9% !important;
+					     }
+				     </style>
+			     </t>
+		    </xpath>
+
+		</template>
+		
+		<template id="main_template_inherit" inherit_id="account_reports.main_template">
+			<xpath expr="//table[hasclass('o_account_reports_table')]" position="attributes">
+			     <attribute name="style">word-wrap:break-word !important; table-layout: fixed !important; white-space: normal !important;  border-collapse: collapse;  cell-spacing:0px; </attribute>
+		    </xpath>
+		</template>
+</odoo>

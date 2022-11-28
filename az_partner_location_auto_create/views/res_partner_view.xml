@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="view_partner_stock_form_locations" model="ir.ui.view">
+        <field name="name">res.partner.stock.property.form.inherit.custom.locations</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']/group" position="inside">
+                    <group name="container_row_stock" groups="base.group_no_one" priority="6">
+                        <group string="Partner Locations" name="customer_locations" colspan="2" attrs="{'invisible':[('is_company','!=',True)]}">
+                            <field name="customer_foc_location" attrs="{'invisible':[('is_company','!=',True)]}"/>
+						    <field name="customer_real_stock_location" attrs="{'invisible':[('is_company','!=',True)]}"/>
+						    <field name="customer_consignment_stock_location" attrs="{'invisible':[('is_company','!=',True)]}"/>
+						    <field name="customer_demo_stock_location" attrs="{'invisible':[('is_company','!=',True)]}"/>
+						    <field name="customer_tender_stock_location" attrs="{'invisible':[('is_company','!=',True)]}"/>
+                        </group>
+                    </group>
+            </xpath>
+            <xpath expr="//field[@name='property_stock_customer']" position="replace">
+            	<field name="property_stock_customer" attrs="{'invisible':[('is_company','==',True)]}"/>
+           	</xpath>
+        </field>
+    </record>
+    
+    
+    
+    <record id="res_partner_view_stock_buttons" model="ir.ui.view">
+            <field name="name">res.partner.view.stock.buttons</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                     <button string="Customer Stock"
+                                class="oe_stat_button"
+                                icon="fa-cubes" name="customer_location_open_quants" type="object"/>
+                </div>
+            </field>
+     </record>
+     
+     
+        
+</odoo>

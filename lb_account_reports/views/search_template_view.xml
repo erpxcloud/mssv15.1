@@ -1,0 +1,90 @@
+<odoo>
+	<data>
+		<template id="account_reports_backend" inherit_id="web.assets_backend" active="True">
+            <xpath expr="." position="inside">
+            	<link rel="stylesheet" href="/lb_account_reports/static/src/tagsinput/bootstrap-tagsinput.css" type="text/css" />
+            	<script type="text/javascript" src="/lb_account_reports/static/src/tagsinput/bootstrap-tagsinput.min.js"/>
+		        <script type="text/javascript" src="/lb_account_reports/static/src/js/account_reports.js"/>
+		    </xpath>
+	  	</template>
+  
+		<template id="search_template_multi_currency">
+	        <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+	            <span class="fa fa-filter"/>
+	            Currency:
+	            <t t-set="selected_currencies" t-value="', '.join(currency.get('name') for currency in options['multi_currency'] if currency.get('selected'))"/>
+	            <t t-if="selected_currencies">
+	                <t t-esc="selected_currencies"/>
+	            </t>
+	        </a>
+	        <div class="dropdown-menu o_filters_menu" role="menu">
+	            <t t-foreach="options['multi_currency']" t-as="c">
+	                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="c.get('name')" data-filter="selected_multi_currency" t-att-data-id="c.get('id')"><t t-esc="c.get('name')"/></a>
+	            </t>
+	        </div>
+	    </template>
+    	
+    	<template id="search_template_account_level">
+    		<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+	            <span class="fa fa-filter"/>
+	            Account Level Up To:
+	            <t t-set="selected_account_level_value" t-value="options.get('selected_account_level')"/>
+	            <t t-if="selected_account_level_value">
+	              <t t-esc="selected_account_level_value"/>
+	            </t>
+	            <t t-else="">
+	            	All
+	            </t>
+	        </a>
+	        <div class="dropdown-menu o_level_menu" role="menu">
+                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="1" data-filter="selected_account_level" t-att-data-id="1">1</a>
+                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="2" data-filter="selected_account_level" t-att-data-id="2">2</a>
+                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="3" data-filter="selected_account_level" t-att-data-id="3">3</a>
+                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="4" data-filter="selected_account_level" t-att-data-id="4">4</a>
+                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="5" data-filter="selected_account_level" t-att-data-id="5">5</a>
+                <a role="menuitem" class="dropdown-item js_account_reports_one_choice_filter" t-att-title="all" data-filter="selected_account_level" t-att-data-id="0">All</a>
+	        </div>
+    	</template>
+    	
+    	<template id="search_template_extra_options" inherit_id="account_reports.search_template_extra_options">
+    		<xpath expr="//div[hasclass('o_filters_menu')]" position="replace">
+    			<div class="dropdown-menu o_filters_menu" role="menu">
+		            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('all_entries') != None" title="Include unposted entries" data-filter="all_entries" groups="account.group_account_user">Include Unposted Entries</a>
+		            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('hierarchy_parent') != None" title="Hierarchy Parents" data-filter="hierarchy_parent">Hierarchy Only Parents</a>
+		            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('hierarchy') != None" title="Hierarchy" data-filter="hierarchy">Hierarchy and Subtotals</a>
+		            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('unreconciled') != None" title="Unreconciled" data-filter="unreconciled">Only Show Unreconciled Entries</a>
+		            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('unfold_all') != None" title="Unfold" data-filter="unfold_all">Unfold All</a>
+    			</div>
+    		</xpath>
+    	</template>
+    		
+		<template id="search_template_inherit" inherit_id="account_reports.search_template">
+    		<xpath expr="//div[hasclass('o_account_reports_filter_account_type')]" position="after">
+    			<style>
+					.o_account_reports_page .o_account_report_line {
+					    text-align: left !important;
+					}
+					.o_account_reports_page .o_account_reports_table .number {
+					    text-align: right !important;
+					}
+				</style>
+		        <div class="btn-group o_dropdown o_account_reports_filter_multi_currency" t-if="options.get('multi_currency') != None">
+		            <t t-call="lb_account_reports.search_template_multi_currency"/>
+		        </div>
+		    </xpath>
+		    
+		    <!-- <xpath expr="//div[hasclass('o_account_reports_filter_bool')]" position="after">
+	            <div class="btn-group o_dropdown o_account_reports_filter_bool" t-if="options.get('cash_basis') != None or options.get('all_entries') != None or options.get('unfold_all') != None">
+		            <t t-call="lb_account_reports.search_template_extra_options"/>
+		        </div>
+	        </xpath> -->
+        
+		    <xpath expr="//div[hasclass('o_account_reports_filter_bool')]" position="after">
+		        <div class="btn-group o_dropdown o_account_reports_filter_account_level" t-if="options.get('hierarchy_parent')">
+		            <t t-call="lb_account_reports.search_template_account_level"/>
+		        </div>
+		    </xpath>
+		    
+	    </template>
+	</data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_customer_foc_wizard_form_foc" model="ir.ui.view">
+            <field name="name">customer.foc.wizard.form</field>
+            <field name="model">customer.foc.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Customer FOC">
+                <span> This Customer has This product in his FOC location.</span>
+                <span> Are you sure you want to confirm?</span>
+                <footer>
+		    	<button string="Confirm" name="set_foc_state" type="object" class="oe_highlight"/>
+		    	   or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+        <record id="action_customer_foc_wizard" model="ir.actions.act_window">
+            <field name="name">Customer FOC</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customer.foc.wizard</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+</odoo>

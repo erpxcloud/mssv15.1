@@ -1,0 +1,53 @@
+<odoo>
+	<data>
+		<record id="azk_accounting_payment_currency_wizard_account_payment_invoice_form_inherit" model="ir.ui.view">
+			<field name="name">azk_accounting_payment_currency_wizard.account.payment.invoice.form_inherit</field>
+			<field name="model">account.payment</field>
+			<field name="inherit_id" ref="account.view_account_payment_invoice_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//label[@for='amount']" position="before">
+					<label for="account_amount"/>
+					<div name="account_amount_div" class="o_row">
+                       	<field name="account_currency_id" readonly="1"/>
+						<field name="account_amount" required="1"/>
+					</div>
+                   	<field name="company_currency_id" invisible="1"/>
+				</xpath>
+			</field>
+		</record>
+        
+        
+        <record id="wizard_register_payment_form" model="ir.ui.view">
+			<field name="name">azk_accounting_payment_currency_wizard.account.payment.invoice.form_inherit</field>
+			<field name="model">hr.expense.sheet.register.payment.wizard</field>
+			<field name="inherit_id" ref="hr_expense.hr_expense_sheet_register_payment_view_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//div[@name='amount_div']" position="after">
+                    <field name="account_amount_values"/>
+                    <field name="account_amount_currency_id"/>
+					
+				</xpath>
+			</field>
+		</record>
+        
+        <record id="hr_ecp_form_view" model="ir.ui.view">
+			<field name="name">hr.exp</field>
+			<field name="model">hr.expense.sheet</field>
+			<field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form" />
+			<field name="arch" type="xml">
+                
+                <xpath expr="//button[@name='%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d']" position="replace">
+                    <button name="%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d" type="action" string="Register Payment" class="oe_highlight o_expense_sheet_pay" attrs="{'invisible': [('state', '!=', 'post')]}" context="{'default_amount': total_amount, 'partner_id': address_id, 'default_account_amount_values':account_amount_value,
+                   'default_account_amount_currency_id' : account_currency}" groups="account.group_account_manager"/>
+                </xpath>
+				<xpath expr="//group[@name='expense_total']" position="inside">
+          
+                    <field name="account_amount_value"/>
+                    <field name="account_currency" invisible="1"/>
+                  
+					
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

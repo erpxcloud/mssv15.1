@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="amount_currency_wizard" model="ir.ui.view">
+		<field name="name">amount.currency.wizard.form</field>
+		<field name="model">amount.currency.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="partner_id" options="{'no_create': True, 'no_create_edit': True}" invisible="context.get('general_ledger', False)"  required="not context.get('general_ledger', False)" />
+						<field name="currency_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" />
+					</group>
+					<group>
+                        <field name="company_id" readonly="1"/>
+						<field name="account_id" widget="many2many_tags" domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_create_edit': True}"/>
+						<field name="analytic_account_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" domain="['|', ('partner_id', '=', False), ('partner_id', '=', partner_id)]"/>
+					</group>
+					<group>
+						<field name="from_date" required="1" />
+						<field name="to_date" required="1" />
+					</group>
+				</group>
+				<footer>
+					<div>
+						<button name="print_amount_currency" string="Print"
+							type="object" default_focus="1" class="oe_highlight" invisible="context.get('general_ledger', False)" />
+						<button name="print_amount_currency_gl" string="Print"
+						type="object" default_focus="1" class="oe_highlight" invisible="not context.get('general_ledger', False)" />
+						<button
+	                        name="export_xlsx"
+	                        string="Export"
+	                        style="margin-left: 5px;"
+	                        type="object"
+	                        class="btn-primary"
+	                        icon="fa-file-excel-o"
+	                    />
+						<button name="preview_amount_currency" string="Preview"
+							type="object" default_focus="1" class="oe_highlight" style="margin-left: 5px;" />
+						<button string="Cancel" class="btn btn-secondary"
+							special="cancel" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+	
+	
+	<template id="action_amount_currency_report">
+	    <t t-call="web.html_container">
+	        <t t-foreach="docs" t-as="doc">
+	        	<t t-call="web.external_layout">
+        
+	        		<div class="page">
+            			<div class="oe_structure"/>
+            			
+            			<t t-if="not doc.get_partner_account_jv()">
+            				<h3>No data found</h3>
+            			</t>
+            			
+            			<t t-foreach="doc.get_partner_account_jv()" t-as="report_currency">
+            					<div class="row mt32" style="margin-bottom: 10px" id="informations">
+					                <div class="col-4" t-if="doc.partner_id">
+						                <div class="col-auto mw-100 mb-2">
+						                    <strong>Partner:</strong>
+						                    <div t-field="doc.partner_id"
+								                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+								            <p  class="m-0" t-if="doc.partner_id.vat"><t t-esc="doc.partner_id.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>
+						                </div>
+						             </div>
+						             <div class="col-4" t-if="doc.account_id">
+						             	<div class="col-auto mw-100 mb-2">
+							            	<strong>Account:</strong>
+							                <span class="m-0" t-field="doc.account_id"/>
+							            </div>
+					                 </div>
+					                 <div class="col-4" t-if="doc.analytic_account_ids">
+					                 	<div class="col-auto mw-100 mb-2">
+							                <strong>Analytic Account:</strong>
+							            	<span class="m-0" t-field="doc.analytic_account_ids"/>
+							            </div>
+					                 </div>
+					           </div>
+					           <div class="row mb32">
+			                		<div class="col-4">
+						                <div class="col-auto mw-100 mb-2">
+						                    <strong>Date From:</strong>
+						                    <span class="m-0" t-field="doc.from_date"/>
+						                </div>
+						            </div>
+						           	<div class="col-4">
+						                <div class="col-auto mw-100 mb-2">
+						                    <strong>Date To:</strong>
+						                    <span class="m-0" t-field="doc.to_date"/>
+						                </div>
+						            </div>
+						            <div class="col-4">
+						                <div class="col-auto mw-100 mb-2">
+						                    <strong>Currency:</strong>
+						                    <span class="m-0" t-esc="report_currency.get('currency_id').name" />
+						                </div>
+						            </div>
+					            </div>
+			            
+					        	<table class="table table-bordered">
+									<thead>
+										<tr>
+											<td width="120">Date</td>
+											<td>Document</td>
+											<td>Description</td>
+											<t t-if="request.env.company.add_invoice_customer">
+												<td>Customer Reference</td>
+												<td>Invoice Date</td>
+											</t>
+											<td>Debit</td>
+											<td>Credit</td>
+											<td>Balance</td>
+										</tr>
+									</thead>	
+									<tbody>
+										<tr>
+			                                <td></td>
+			                                <td></td>
+			                                <td><strong>Previous Balance</strong></td>
+			                                <td class="text-right">
+			                                    <strong t-if="report_currency.get('initial_balance') > 0" t-esc="'{:,.2f}'.format(abs(report_currency.get('initial_balance')))" />
+			                                </td>
+			                                <td class="text-right">
+			                                    <strong t-if="not report_currency.get('initial_balance') > 0"  t-esc="'{:,.2f}'.format(abs(report_currency.get('initial_balance')))" />
+			                                </td>
+			                                <td class="text-right"></td>
+			                                	<t t-if="request.env.company.add_invoice_customer">
+											<td></td>
+											<td></td>
+											
+											</t>
+			                             </tr>
+										 <t t-foreach="report_currency.get('account_move_lines_list')" t-as="jv">
+										 	<tr>
+										 		<td><span t-esc="jv.get('date')" /></td>
+										 		<td style="word-break: break-all;"><span t-esc="jv.get('document')" /></td>
+										 		<td style="word-break: break-all;"><span t-esc="jv.get('description')" /></td>
+										 		<t t-if="request.env.company.add_invoice_customer">
+											 		<td style="word-break: break-all;"><span t-esc="jv.get('ref')" /></td>
+											 		<td><span t-esc="jv.get('invoice_date')" /></td>
+												</t>
+										 		<td class="text-right"><span t-esc="'{:,.2f}'.format(jv.get('debit'))" /></td>
+										 		<td class="text-right"><span t-esc="'{:,.2f}'.format(jv.get('credit'))" /></td>
+										 		<td class="text-right"><span t-esc="'{:,.2f}'.format(jv.get('balance'))" /></td>
+										 	</tr>
+										 </t>
+										 <tr style="background: #eee">
+			                                <td></td>
+			                                <td></td>
+			                                <td><strong>Total</strong></td>
+			                                <td class="text-right">
+			                                	<t t-if="report_currency.get('initial_balance') > 0">
+			                                		<t t-set="totaldebit" t-value="(sum([a.get('debit') for a in report_currency.get('account_move_lines_list')]) + abs(report_currency.get('initial_balance')))"/>
+			                                	</t>
+			                                	<t t-else="">
+			                                		<t t-set="totaldebit" t-value="(sum([a.get('debit') for a in report_currency.get('account_move_lines_list')]))"/>
+			                                	</t>
+			                                    <strong><span t-esc="'{:,.2f}'.format(totaldebit)" /></strong>
+			                                </td>
+			                                <td class="text-right">
+			                                	<t t-if="not report_currency.get('initial_balance') > 0">
+			                                		<t t-set="totalcredit" t-value="(sum([a.get('credit') for a in report_currency.get('account_move_lines_list')]) + abs(report_currency.get('initial_balance')))"/>
+			                                	</t>
+			                                	<t t-else="">
+			                                		<t t-set="totalcredit" t-value="(sum([a.get('credit') for a in report_currency.get('account_move_lines_list')]))"/>
+			                                	</t>
+			                                    <strong><span t-esc="'{:,.2f}'.format(totalcredit)" /></strong>
+			                                </td>
+	<t t-if="request.env.company.add_invoice_customer">
+											<td></td>
+											<td></td>
+											<td></td>
+											</t>			                                
+			                             </tr>
+										 <tr class="text-right">
+			                                <td colspan="99">
+			                                    <strong class="mr16">Total Balance in <span t-esc="report_currency.get('currency_id').name" />:</strong>
+			                                    <span t-esc="'{:,.2f}'.format(report_currency.get('total_balance'))" />
+			                                </td>
+			                            </tr>
+									</tbody>        		
+					        	 </table>
+						    	
+						    	 <div class="page-break" style="page-break-before: always;"></div>
+						   </t>
+			        </div>
+		       	</t>
+	        </t>
+	    </t>
+  	</template>
+	
+	<template id="action_amount_currency_report_gl">
+		<t t-call="lb_account_reports.action_amount_currency_report" />
+	</template>
+	
+	<report 
+         string="Report Account Currency" 
+         id="report_amount_currency" 
+         model="amount.currency.wizard" 
+         name="lb_account_reports.action_amount_currency_report"
+         file="lb_account_reports.action_amount_currency_report" 
+         report_type="qweb-pdf"
+         print_report_name="'Partner Ledger AC - %s - (%s_%s)' % (object.partner_id.name, object.from_date, object.to_date)"
+     />
+     
+     <report 
+         string="Report Account Currency GL" 
+         id="report_amount_currency_gl" 
+         model="amount.currency.wizard" 
+         name="lb_account_reports.action_amount_currency_report_gl"
+         file="lb_account_reports.action_amount_currency_report_gl" 
+         report_type="qweb-pdf"
+         print_report_name="'General Ledger AC - (%s_%s)' % (object.from_date, object.to_date)"
+     />
+    
+</odoo>
+

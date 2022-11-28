@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<template id="report_invoice">
+			<t t-set="is_letter_head" t-value="True"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="account.report_invoice_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_invoice_with_payments">
+        	<t t-set="is_letter_head" t-value="True"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+        
+		<template id="report_payment_receipt">
+			<t t-set="is_letter_head" t-value="True"/>
+	        <t t-call="web.html_container">
+	            <t t-foreach="docs" t-as="o">
+	                <t t-set="lang" t-value="o.partner_id.lang"/>
+	                <t t-call="account.report_payment_receipt_document" t-lang="lang"/>
+	            </t>
+	        </t>
+	    </template>
+    		
+        <report
+            id="account_invoices"
+            model="account.move"
+            string="Invoices - Letter Head"
+            report_type="qweb-pdf"
+            name="lb_accounting.report_invoice_with_payments"
+            file="lb_accounting.report_invoice_with_payments"
+            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+        />
+
+        <report
+            id="account_invoices_without_payment"
+            model="account.move"
+            string="Invoices without Payment - Letter Head"
+            report_type="qweb-pdf"
+            name="lb_accounting.report_invoice"
+            file="lb_accounting.report_invoice"
+            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+        />
+        
+        <report
+            id="action_report_payment_receipt"
+            model="account.payment"
+            string="Payment Receipt - Letter Head"
+            report_type="qweb-pdf"
+            name="lb_accounting.report_payment_receipt"
+            file="lb_accounting.report_payment_receipt"
+            menu="True"
+        />
+    </data>
+</odoo>

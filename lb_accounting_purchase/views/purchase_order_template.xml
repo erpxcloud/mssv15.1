@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+		<xpath expr="//table" position="attributes">
+	        <attribute name="class">table table-sm table-striped</attribute>
+	    </xpath>
+	    
+        <xpath expr="//div[hasclass('page')]//h2" position="before">
+			<link rel="stylesheet" type="text/css" href="/lb_accounting/static/src/css/report_style.css"/>
+        	<style>
+        		body{
+				    font-family: "Times New Roman", Times, serif !important;
+				    color: #000 !important;
+				}
+				
+				h2{
+					margin: 0 !important;
+				}
+				
+				h2, h2 span, h3, h3 span{
+					font-size: 1.625rem !important;
+					color: #000 !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				span, p, label{
+					font-size:11px !important;
+					color: #000 !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				table, table > td, table > th, table > tr{
+					color: #000 !important;
+					font-size:11px !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				.o_total > td{
+					color: #000 !important;
+					background-color: #e9ecef !important;
+					font-family: "Times New Roman", Times, serif !important;
+				}
+				
+				.o_boxed_footer {
+				    margin-top: 0 !important;
+				    white-space: nowrap;
+				    border-top: 1px solid #e9ecef!important;
+				}
+				
+				.o_report_layout_boxed .row > div > table tr:last-child td, .o_report_layout_boxed .row > div > table tr.o_total td, .o_report_layout_boxed div#total table tr:last-child td, .o_report_layout_boxed div#total table tr.o_total td {
+				    background-color: rgba(0, 0, 0, 0.05) !important;
+				    color: #000 !important;
+				    font-weight: bold  !important;
+				}
+				#informations{
+					margin-top: 0 !important;
+					margin-bottom: 0 !important;
+				}
+				.o_report_layout_boxed .row > div > table tr:last-child td, .o_report_layout_boxed .row > div > table tr.o_total td, .o_report_layout_boxed div#total table tr:last-child td, .o_report_layout_boxed div#total table tr.o_total td {
+					    background-color: rgba(0, 0, 0, 0.05) !important;
+					    color: #000 !important;
+					    font-weight: bold  !important;
+				}
+			</style>
+
+	      	<t t-set="address"></t>
+	      	<t t-set="information_block"></t>
+        	<div id="contact_informations" class="row mt32">
+        		<div class="col-6 mb-2" t-if="o.partner_id.name" name="contact_name">
+        			<div class="d-flex align-items-baseline">
+            			<div class="w-100">
+            				<p class="m-0" t-if="o.partner_id.name">
+	                			<strong>Name: </strong> <span t-field="o.partner_id.display_name" />
+	                		</p>
+	                		<p class="m-0" t-if="o.partner_id.vat">
+	                			<strong><t t-if="o.partner_id.is_vat">VAT#: </t><t t-else="">MOF#: </t> </strong> <span t-field="o.partner_id.vat" />
+	                		</p>
+	                		<p class="m-0">
+		                		<span t-if="o.partner_id.street"><strong>Address:</strong> <span t-if="o.partner_id.street" t-field="o.partner_id.street" /></span>
+		                		<span t-if="o.partner_id.street2">, <span t-field="o.partner_id.street2"></span>, </span>
+		                		<span t-if="o.partner_id.city"><span t-if="o.partner_id.city" t-field="o.partner_id.city"/>, </span>
+		                		<span t-if="o.partner_id.state_id"><span t-field="o.partner_id.state_id"></span>, </span>
+		                		<span t-if="o.partner_id.country_id"><span t-field="o.partner_id.country_id"></span></span>
+		                	</p>
+	                    	<p class="m-0" t-if="o.partner_id.phone"><strong>Tel.: </strong><span t-field="o.partner_id.phone"></span></p>
+	                    	<p class="m-0" t-if="o.partner_id.mobile"><strong>Mobile: </strong><span t-field="o.partner_id.mobile"></span></p>
+	                    	<p class="m-0" t-if="o.partner_id.email"><strong>Email: </strong><span t-field="o.partner_id.email"></span></p>
+	                    	<p class="m-0" t-if="o.partner_id.website"><strong>Website: </strong><span t-field="o.partner_id.website"></span></p>
+            			</div>
+            		</div>
+
+               </div>
+               <div class="col-6 mb-2" t-if="o.dest_address_id" name="dest_address">
+	                <span>
+	                	<strong>Shipping address:</strong>
+		                <div t-if="o.dest_address_id">
+		                    <div t-field="o.dest_address_id"
+		                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
+		                </div>
+	                </span>
+               </div>
+        	</div>
+	     </xpath>
+	     <xpath expr="//div[@id='total']" position="after">
+	     	<p style="margin-bottom: 10px; margin-top: 10px;">
+        		<t t-if="o.po_currency_rate">
+        			<t t-set="po_currency_rate" t-value="o.po_currency_rate" />
+        		</t>
+        		<t t-else="">
+        			<t t-set="po_currency_rate" t-value="o.currency_id.rate" />
+        		</t>
+        		
+        		<t t-if="o.company_id.say_of_default_currency and o.currency_id.id != o.company_id.say_of_default_currency.id">
+	        		Net to Pay in <span t-field="o.currency_id" />: The Sum of <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only.
+	        		<br></br>
+	        		<t t-set="net_to_pay_say_of_currency" t-value="o.amount_total / po_currency_rate * o.say_of_currency_rate" />
+	        		<t t-set="net_to_pay_in_words" t-value="o.company_id.say_of_default_currency.amount_to_text(net_to_pay_say_of_currency)" />
+	        		
+	        		<span>
+		        		Net to Pay in <span t-field="o.company_id.say_of_default_currency" />: (<span t-esc="net_to_pay_say_of_currency" t-options='{"widget": "monetary", "display_currency": o.company_id.say_of_default_currency}' />)<span> The Sum of <span t-esc="net_to_pay_in_words"/> Only</span>.
+		        		<br></br>
+	        		</span>
+	        	</t>
+	        	<t t-else="">
+	        		Net to Pay in <span t-field="o.currency_id" />: The Sum of <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only.
+	        		<br></br>
+	        	</t>
+				
+				<t t-if="o.amount_tax">
+					<t t-if="o.company_id.tax_say_of_default_currency">
+                		<t t-set="tax_amount" t-value="o.amount_tax" />
+                		
+                		<t t-if="o.currency_id.id != o.company_id.tax_say_of_default_currency.id">
+							<t t-set="vat_amount_say_of_currency" t-value="tax_amount / po_currency_rate * o.tax_say_of_currency_rate" />
+						</t>
+						<t t-else="">
+		        			<t t-set="vat_amount_say_of_currency" t-value="tax_amount" />
+		        		</t>
+        				
+        				<t t-set="vat_amount_in_words" t-value="o.company_id.tax_say_of_default_currency.amount_to_text(vat_amount_say_of_currency)" />
+        				
+                		<span>
+                            Taxes Amount in <span t-field="o.company_id.tax_say_of_default_currency" />: (<span t-esc="vat_amount_say_of_currency"  t-options='{"widget": "monetary", "display_currency": o.company_id.tax_say_of_default_currency}' />) <span>The Sum of <span t-esc="vat_amount_in_words"/> Only</span>.
+						</span>	   
+						<br />                     
+	                </t>
+                </t>
+        	</p>
+        	
+        	<p t-if="o.remarks">
+        		<label><strong>Remarks</strong></label>
+        		<br></br>
+        		<span t-field="o.remarks"/>
+        	</p>
+        </xpath>
+	</template>
+</odoo>

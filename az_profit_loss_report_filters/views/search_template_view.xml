@@ -1,0 +1,38 @@
+<odoo>
+	<template id="search_template_divisions">
+        <button t-if="options.get('divisions')" type="button" class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle division_filter" data-toggle="dropdown">
+            <span class="fa fa-folder-open"/> Divisions
+        </button>
+        <ul class="dropdown-menu o_filter_menu" role="menu">
+            <li class="o_account_report_search js_divisions_m2m"/>
+        </ul>
+    </template>
+    
+    <template id="search_template_end_users">
+        <button t-if="options.get('end_users')" type="button" class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle end_users_filter" data-toggle="dropdown">
+            <span class="fa fa-folder-open"/> End User
+        </button>
+        <ul class="dropdown-menu o_filter_menu" role="menu">
+            <li class="o_account_report_search js_end_users_m2m"/>
+        </ul>
+    </template>
+    
+    <template id="az_search_template_inherit" inherit_id="account_reports.search_template">
+	    <xpath expr="//div[hasclass('o_account_reports_filter_analytic')]" position="after">
+	        <div class="btn-group o_dropdown o_account_reports_filter_divisions" t-if="options.get('divisions') != None">
+	            <t t-call="az_profit_loss_report_filters.search_template_divisions"/>
+	        </div>
+	         <div class="btn-group o_dropdown o_account_reports_filter_end_users" t-if="options.get('end_users') != None">
+	            <t t-call="az_profit_loss_report_filters.search_template_end_users"/>
+	        </div>
+	    </xpath>
+    </template>
+	    
+	    
+	<template id="az_division_financial_reports_backend" inherit_id="web.assets_backend" active="True">
+        <xpath expr="." position="inside">
+        	<script type="text/javascript" src="/az_profit_loss_report_filters/static/src/js/account_reports.js"/>
+		</xpath>
+	</template>
+</odoo>
+

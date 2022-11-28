@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_nonauthorized_user_group_user,account.nonauthorized.user.user,model_account_nonauthorized_user,base.group_user,1,1,1,1

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="azkatech_account_tax_lb_1" model="account.tax.template">
+			<field name="description">VAT 11%</field>
+			<field name="name">VAT Sales</field>
+			<field name="amount">11.00</field>
+			<field name="amount_type">percent</field>
+			<!-- <field name="account_id" ref="azkatech_COA_lb_216"/> -->
+			<!-- <field name="refund_account_id" ref="azkatech_COA_lb_216"/> -->
+			<field name="type_tax_use">sale</field>
+			<field eval="1" name="vat_tax"/>
+			<field ref="lebanese_chart_template_standard" name="chart_template_id"/>
+			<field name="tax_group_id" ref="azkatech_tax_group_lb_11"/>
+        </record>
+        
+        <record id="azkatech_account_tax_lb_2" model="account.tax.template">
+			<field name="description">VAT 11%</field>
+			<field name="name">VAT Purchases</field>
+			<field name="amount">11.00</field>
+			<field name="amount_type">percent</field>
+			<!-- <field name="account_id" ref="azkatech_COA_lb_217"/> -->
+			<!-- <field name="refund_account_id" ref="azkatech_COA_lb_217"/> -->
+			<field name="type_tax_use">purchase</field>
+			<field eval="1" name="vat_tax"/>
+			<field ref="lebanese_chart_template_standard" name="chart_template_id"/>
+			<field name="tax_group_id" ref="azkatech_tax_group_lb_11"/>
+        </record>
+        
+    </data>
+</odoo>

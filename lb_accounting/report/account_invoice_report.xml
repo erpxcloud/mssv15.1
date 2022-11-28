@@ -1,0 +1,15 @@
+<odoo>
+	<record id="view_account_invoice_report_search_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.report.search.inherit</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+        <field name="arch" type="xml">
+        	<field name="partner_id" position="after">
+        		<field name="partner_official_name" string="Partner Official Name"></field>
+        	</field>
+        	<filter name="partner_id" position="after">
+        		<filter name="partner_official_name" string="Partner Official Name" context="{'group_by':'partner_official_name','residual_visible':True}"/>
+        	</filter>
+        </field>
+   </record>
+</odoo>

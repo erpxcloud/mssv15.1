@@ -1,0 +1,13 @@
+<odoo noupdate="1">
+        <record model="hr.payroll.structure" id="hr_payroll_salary_structure_lebanese_standard_lbp">
+            <field name="name" >Lebanese Standard LBP</field>
+            <field name="type_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_type_lebanese_employee')" ></field>
+            <field name="country_id" eval="ref('base.lb')"></field>
+        </record>
+        
+        <record model="hr.payroll.structure" id="hr_payroll_salary_structure_lebanese_standard_usd">
+                <field name="name" >Lebanese Standard USD</field>
+                <field name="type_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_type_lebanese_employee')" ></field>
+                <field name="country_id" eval="ref('base.lb')"></field>
+        </record>
+</odoo>

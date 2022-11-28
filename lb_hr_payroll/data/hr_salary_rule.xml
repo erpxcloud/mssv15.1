@@ -1,0 +1,1355 @@
+<odoo noupdate="1">
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_0">
+                <field name="name" >Basic Salary</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_7')"></field>
+                <field name="code">BSAL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employee')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = contract.wage</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">1005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_1">
+                <field name="name" >Basic Salary LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_15')"></field>
+                <field name="code">BSALLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employee')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = contract.wage</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">1005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_2">
+                <field name="name" >Gross</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_0')"></field>
+                <field name="code">GROSS</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = categories.BASICSAL- categories.DED</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">3005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_3">
+                <field name="name" >Gross LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_21')"></field>
+                <field name="code">GROSSLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = categories.BASICSALLL- categories.DEDLL</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">3005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_4">
+                <field name="name" >Exmp Single</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_3')"></field>
+                <field name="code">EXSING</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_exemption')"></field>
+                <field name="amount_fix">416.67</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">4005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_5">
+                <field name="name" >Exmp Single LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_10')"></field>
+                <field name="code">EXSINGLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_exemption')"></field>
+                <field name="amount_fix">625000</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">4005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_6">
+                <field name="name" >Exmp Spouse NoWork</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_3')"></field>
+                <field name="code">EXSPNW</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_exemption')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = 138.89 + employee.dependent_children * 27.78</field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.marital not in["single"]) and (employee.spouse_fiscal_status in ["without income"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">4010</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_7">
+                <field name="name" >Exmp Spouse NoWork LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_10')"></field>
+                <field name="code">EXSPNWLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_exemption')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = 208333.33 + employee.dependent_children * 41666.67</field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.marital not in["single"]) and (employee.spouse_fiscal_status in ["without income"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">4010</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_8">
+                <field name="name" >Exmp Spouse Work</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_3')"></field>
+                <field name="code">EXSPYW</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_exemption')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result =  employee.dependent_children * (27.78/2)</field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.marital not in["single"]) and (employee.spouse_fiscal_status in ["with income"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">4015</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_9">
+                <field name="name" >Exmp Spouse Work LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_10')"></field>
+                <field name="code">EXSPYW</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_exemption')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result =  employee.dependent_children * (41666.67/2)</field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.marital not in["single"]) and (employee.spouse_fiscal_status in ["with income"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">4015</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_10">
+                <field name="name" >Taxable Total Amount</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_6')"></field>
+                <field name="code">TTAMT</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = categories.BASICSAL-categories.DED- categories.EXMP</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">5005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_11">
+                <field name="name" >Taxable Total Amount LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_14')"></field>
+                <field name="code">TTAMTLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = categories.BASICSALLL-categories.DEDLL- categories.EXMPLL</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">5005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_12">
+                <field name="name" >Income Tax</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_8')"></field>
+                <field name="code">ITAX</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result =categories.ITAXL</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">6010</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_13">
+                <field name="name" >Income Tax LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_13')"></field>
+                <field name="code">ITAXLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result =categories.ITAXLLL</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">6010</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_14">
+                <field name="name" >NSSF Medical - 3%</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_18')"></field>
+                <field name="code">MEDNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = min (contract.wage * 0.03,50)</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_15">
+                <field name="name" >NSSF Medical - 3% LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_19')"></field>
+                <field name="code">MEDNSSFLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = min (contract.wage * 0.03,75000)</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_16">
+                <field name="name" >End of Service Indemnity</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_18')"></field>
+                <field name="code">ESI</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employer')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">8.5</field>
+                <field name="amount_percentage_base">categories.GROSS</field>
+                <field name="amount_python_compute">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days.
+                            # inputs: object containing the computed inputs.
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = contract.wage * 0.10</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7020</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_17">
+                <field name="name" >End of Service Indemnity LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_19')"></field>
+                <field name="code">ESILL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employer')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">8.5</field>
+                <field name="amount_percentage_base">categories.GROSSLL</field>
+                <field name="amount_python_compute">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days.
+                            # inputs: object containing the computed inputs.
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = contract.wage * 0.10</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7020</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_18">
+                <field name="name" >NSSF Family Allocation  - 6% LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_19')"></field>
+                <field name="code">FANSSFLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employer')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = min (contract.wage * 0.06,90000)</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7030</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_19">
+                <field name="name" >NSSF Family Allocation  - 6%</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_18')"></field>
+                <field name="code">FANSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employer')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = min (contract.wage * 0.06,60)</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7030</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_20">
+                <field name="name" >NSSF Medical Employer  - 9%</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_18')"></field>
+                <field name="code">MEDENSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employer')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = min (contract.wage * 0.09,150)</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7040</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_21">
+                <field name="name" >NSSF Medical Employer  - 9% LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_19')"></field>
+                <field name="code">MEDENSSFLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employer')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = min (contract.wage * 0.09,225000)</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">7040</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_22">
+                <field name="name" >Transportation</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_5')"></field>
+                <field name="code">TRANS</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employee')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = (worked_days.WORK100 and worked_days.WORK100.number_of_days ) * 5.33</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">8005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_23">
+                <field name="name" >Transportation LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_11')"></field>
+                <field name="code">TRANSLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employee')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = (worked_days.WORK100 and worked_days.WORK100.number_of_days ) * 8000</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">8005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_24">
+                <field name="name" >Meal Voucher</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_4')"></field>
+                <field name="code">MVA</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_meal_voucher_register')"></field>
+                <field name="amount_fix">10</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result=(worked_days.WORK100 and worked_days.WORK100.number_of_days)*MVD</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">worked_days.WORK100 and worked_days.WORK100.number_of_days</field>
+                <field name="sequence">9010</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_25">
+                <field name="name" >Meal Voucher LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_16')"></field>
+                <field name="code">MVALL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_meal_voucher_register')"></field>
+                <field name="amount_fix">10</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result=(worked_days.WORK100 and worked_days.WORK100.number_of_days)*MVDLL</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">worked_days.WORK100 and worked_days.WORK100.number_of_days</field>
+                <field name="sequence">9010</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_26">
+                <field name="name" >Get 1% of sales</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_4')"></field>
+                <field name="code">SALE</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = ((inputs.SALEURO and inputs.SALEURO.amount) + (inputs.SALASIA and inputs.SALASIA.amount)) * 0.01</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">9015</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_27">
+                <field name="name" >Family Allowance Male</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_4')"></field>
+                <field name="code">FAMALLM</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">1</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">if (employee.spouse_fiscal_status in ["without income"]) :
+           result = ALLWNSSF + (ALLCNSSF* employee.dependent_children)
+        elif (employee.spouse_fiscal_status in ["with income"]) :
+           result = (ALLCNSSF* employee.dependent_children) </field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["male"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">9030</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_28">
+                <field name="name" >Family Allowance Male LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_16')"></field>
+                <field name="code">FAMALLMLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">1</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">if (employee.spouse_fiscal_status in ["without income"]) :
+           result = ALLWNSSF + (ALLCNSSF* employee.dependent_children)
+        elif (employee.spouse_fiscal_status in ["with income"]) :
+           result = (ALLCNSSF* employee.dependent_children) </field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["male"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">9030</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_29">
+                <field name="name" >Family Allowance Female</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_4')"></field>
+                <field name="code">FAMALLF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">1</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">if (employee.spouse_fiscal_status in ["without income"]) :
+           result = (ALLCNSSF* employee.dependent_children)
+        elif (employee.spouse_fiscal_status in ["with income"]) :
+           result = 0</field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["female"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">9040</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_30">
+                <field name="name" >Family Allowance Female LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_16')"></field>
+                <field name="code">FAMALLFLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">1</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">if (employee.spouse_fiscal_status in ["without income"]) :
+           result = (ALLCNSSF* employee.dependent_children)
+        elif (employee.spouse_fiscal_status in ["with income"]) :
+           result = 0</field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["female"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">9040</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_33">
+                <field name="name" >Net Salary</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_2')"></field>
+                <field name="code">NET</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employees')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = categories.BASICSAL+ categories.ALLW+ categories.TRANSP- MEDNSSF-categories.ITAX </field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">10005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_34">
+                <field name="name" >Net Salary LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_20')"></field>
+                <field name="code">NETLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="partner_id" eval="ref('lb_hr_payroll.azkatec_contrib_register_employees')"></field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = categories.BASICSALLL+ categories.ALLWLL+ categories.TRANSPLL - MEDNSSFLL - categories.ITAXLL</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">
+                            # Available variables:
+                            #----------------------
+                            # payslip: object containing the payslips
+                            # employee: hr.employee object
+                            # contract: hr.contract object
+                            # rules: object containing the rules code (previously computed)
+                            # categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+                            # worked_days: object containing the computed worked days
+                            # inputs: object containing the computed inputs
+
+                            # Note: returned value have to be set in the variable 'result'
+
+                            result = rules.NET > categories.NET * 0.10</field>
+                <field name="condition_range">contract.wage</field>
+                <field name="quantity">1</field>
+                <field name="sequence">10005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_35">
+                <field name="name" >L1</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_9')"></field>
+                <field name="code">LL1</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">2</field>
+                <field name="amount_percentage_base">min(categories.TAXBLE - 0, 333.33 - 0)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLE</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_36">
+                <field name="name" >L2</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_9')"></field>
+                <field name="code">LL2</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">4</field>
+                <field name="amount_percentage_base">min(categories.TAXBLE - 333.33, 500)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLE - 333.33</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_37">
+                <field name="name" >L3</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_9')"></field>
+                <field name="code">LL3</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">7</field>
+                <field name="amount_percentage_base">min(categories.TAXBLE - 833.33 , 833.33)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLE - 333.33 - 500</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_38">
+                <field name="name" >L4</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_9')"></field>
+                <field name="code">LL4</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">11</field>
+                <field name="amount_percentage_base">min(categories.TAXBLE - 1666.67, 1666.67)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLE - 333.33 - 500 - 833.33</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_39">
+                <field name="name" >L5</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_9')"></field>
+                <field name="code">LL5</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">15</field>
+                <field name="amount_percentage_base">min(categories.TAXBLE - 3333.33,3333.33)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLE - 333.33 - 500 - 833.33 - 1666.67</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_40">
+                <field name="name" >L6</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_9')"></field>
+                <field name="code">LL6</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">20</field>
+                <field name="amount_percentage_base">categories.TAXBLE - 6666.67</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLE - 333.33 - 500 - 833.33 - 1666.67 - 3333.33</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_41">
+                <field name="name" >L1 LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_12')"></field>
+                <field name="code">LL1LL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">2</field>
+                <field name="amount_percentage_base">min(categories.TAXBLELL -  0, 500000 - 0)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLELL</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_42">
+                <field name="name" >L2 LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_12')"></field>
+                <field name="code">LL2LL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">4</field>
+                <field name="amount_percentage_base">min(categories.TAXBLELL - 500000, 750000)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLELL - 500000</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_43">
+                <field name="name" >L3 LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_12')"></field>
+                <field name="code">LL3LL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">7</field>
+                <field name="amount_percentage_base">min(categories.TAXBLELL - 1250000, 1250000)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLELL - 500000- 750000</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_44">
+                <field name="name" >L4 LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_12')"></field>
+                <field name="code">LL4LL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">11</field>
+                <field name="amount_percentage_base">min(categories.TAXBLELL - 2500000, 2500000)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLELL - 500000- 750000- 1250000</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_45">
+                <field name="name" >L5 LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_12')"></field>
+                <field name="code">LL5LL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">15</field>
+                <field name="amount_percentage_base">min(categories.TAXBLELL - 5000000 , 5000000)</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLELL - 500000- 750000- 1250000- 2500000</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_46">
+                <field name="name" >L6 LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_12')"></field>
+                <field name="code">LL6LL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">percentage</field>
+                <field name="appears_on_payslip">FALSE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">1.00E+13</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">20</field>
+                <field name="amount_percentage_base">categories.TAXBLELL - 10000000</field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">range</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range">categories.TAXBLELL - 500000- 750000- 1250000- 2500000- 5000000</field>
+                <field name="quantity">1</field>
+                <field name="sequence">6005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_47">
+                <field name="name" >Meal Voucher/Day</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_17')"></field>
+                <field name="code">MVD</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = contract.meal_voucher_amount</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_48">
+                <field name="name" >Meal Voucher/Day LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_17')"></field>
+                <field name="code">MVDLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = contract.meal_voucher_amount</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9005</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_49">
+                <field name="name" >Wife NSSF</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_23')"></field>
+                <field name="code">ALLWNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">40</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["male"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9020</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_50">
+                <field name="name" >Child NSSF Allowance</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_23')"></field>
+                <field name="code">ALLCNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">22</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["male"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9025</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_51">
+                <field name="name" >Wife NSSF</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_23')"></field>
+                <field name="code">ALLWNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">60000</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["male"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9020</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_52">
+                <field name="name" >Child NSSF Allowance</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_23')"></field>
+                <field name="code">ALLCNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">33000</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["male"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9025</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_53">
+                <field name="name" >Child NSSF Allowance</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_23')"></field>
+                <field name="code">ALLCNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">22</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["female"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9035</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_54">
+                <field name="name" >Child NSSF Allowance</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_23')"></field>
+                <field name="code">ALLCNSSF</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">fix</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">33000</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute"></field>
+                <field name="condition_select">python</field>
+                <field name="condition_python">result = ((employee.gender in ["female"]) and (employee.marital not in["single"]))</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9035</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_55">
+                <field name="name" >School Allowance</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_4')"></field>
+                <field name="code">SCHALL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = inputs.SCHALLIN and inputs.SCHALLIN.amount</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9040</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_usd')"></field>
+        </record>
+        <record model="hr.salary.rule" id="azkatech_sr_payroll_56">
+                <field name="name" >School Allowance LBP</field>
+                <field name="category_id" eval="ref('lb_hr_payroll.azkatec_src_payroll_4')"></field>
+                <field name="code">SCHALLLL</field>
+                <field name="active">TRUE</field>
+                <field name="amount_select">code</field>
+                <field name="appears_on_payslip">TRUE</field>
+                <field name="amount_fix">0</field>
+                <field name="condition_range_max">0</field>
+                <field name="condition_range_min">0</field>
+                <field name="amount_percentage">0</field>
+                <field name="amount_percentage_base"></field>
+                <field name="amount_python_compute">result = inputs.SCHALLINLL and inputs.SCHALLINLL.amount</field>
+                <field name="condition_select">none</field>
+                <field name="condition_python">FALSE</field>
+                <field name="condition_range"></field>
+                <field name="quantity">1</field>
+                <field name="sequence">9040</field>
+                <field name="struct_id" eval="ref('lb_hr_payroll.hr_payroll_salary_structure_lebanese_standard_lbp')"></field>
+        </record>
+</odoo>

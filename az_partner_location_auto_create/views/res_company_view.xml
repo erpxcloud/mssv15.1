@@ -1,0 +1,40 @@
+<odoo>
+	<record id="res_company_form_inherited" model="ir.ui.view">
+		<field name="name">res.company.form.inherit</field>
+		<field name="model">res.company</field>
+		<field name="groups_id" eval="[(6, 0, [ref('default_customer_locatin_config')])]"/>
+		<field name="inherit_id" ref="base.view_company_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//page[1]" position="after">
+				<page string="Inventory Settings" name="inventory_settings">
+					
+	                <div class="o_row">
+	                	<label for="defualt_customer_foc_location"/>
+	                    <field name="defualt_customer_foc_location"/>
+	                </div>
+	                <br/>
+	                <div class="o_row">
+	                	<label for="defualt_customer_real_stock_location"/>
+	                    <field name="defualt_customer_real_stock_location"/>
+	                </div>
+	                <br/>
+	                <div class="o_row">
+	                	<label for="defualt_customer_consignment_stock_location"/>
+	                    <field name="defualt_customer_consignment_stock_location"/>
+	                </div>
+	                <br/>
+	                <div class="o_row">
+	                	<label for="defualt_customer_demo_stock_location"/>
+	                    <field name="defualt_customer_demo_stock_location"/>
+	                </div>
+	                <br/>
+	                <div class="o_row">
+	                	<label for="defualt_customer_tender_stock_location"/>
+	                    <field name="defualt_customer_tender_stock_location"/>
+	                </div>
+					<br/>
+				</page>
+			</xpath>
+		</field>
+	</record>
+</odoo>

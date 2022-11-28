@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+  		<record id="account_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//page[@name='other_info']//field[@name='invoice_partner_bank_id']" position="after">
+           			<field name="remarks"></field>
+            	</xpath>
+            </field>
+        </record>
+        
+        <record id="account_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+            	<field name="name" position="after">
+            		<field name="id"></field>
+            	</field>
+            </field>
+        </record>
+  </data>
+</odoo>

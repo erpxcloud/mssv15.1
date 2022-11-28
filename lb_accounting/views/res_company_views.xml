@@ -1,0 +1,93 @@
+<odoo>
+  <data>
+    	<record id="res_company_form_inherited" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="arch" type="xml">
+            	 <xpath expr="//group//group[1]" position="inside">
+            	 	<field name="website" widget="url" placeholder="e.g. www.odoo.com"/>
+                    <field name="phone"/>
+                    <field name="fax" />
+                    <field name="email"/>
+                    <field name="vat"/>
+                    <field name="company_registry"/>
+            	 </xpath>
+            	 <xpath expr="//group//group[2]" position="replace">
+            	 	<group>
+	            	 	<field name="currency_id" options="{'no_create': True, 'no_open': True}" id="company_currency" context="{'active_test': False}"/>
+	                    <field name="second_currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+	                    <field name="third_currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+						<field string="Contact Account Digits" name="digits_number" />
+						<field name="capital" />
+						<field name="capital_currency_id" options="{'no_create': True, 'no_open': True}" />
+	                    <field name="parent_id" groups="base.group_multi_company"/>
+	                    <field name="sequence" invisible="1"/>
+                    </group>
+            	 </xpath>
+				<xpath expr="//page[1]" position="after">
+					<page string="Printing Labels" name="printing_label">
+						<group>
+							<group>
+								<field name="commercial_reg_label" />
+							</group>
+							<group>
+								<field name="vat_label" />
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="capital_label" />
+							</group>
+						</group>	
+					</page>
+				</xpath>
+			</field>
+       </record>
+       
+       <record id="view_base_company_document_template_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.document.template.form.inherit</field>
+            <field name="model">base.document.layout</field>
+            <field name="inherit_id" ref="base.view_base_document_layout" />
+            <field name="arch" type="xml">
+            	<field name="logo" position="after">
+            		<field name="footer_logo" widget="image" class="mb-4" />
+            	</field>
+            </field>
+       </record>
+       
+       <record id="view_company_letter_head_template_form" model="ir.ui.view">
+            <field name="name">res.company.letter.head.template.form</field>
+            <field name="model">res.company</field>
+            <field name="mode">primary</field>
+            <field name="priority">2048</field>
+            <field name="arch" type="xml">
+                <form class="o_company_document_layout">
+                    <group>
+                        <label for="external_letter_head_report_layout_id" string="Template" colspan="2" />
+                        <field name="external_letter_head_report_layout_id" colspan="2" nolabel="1"
+                                class="report_layout_container"
+                                widget="report_layout" options="{
+                                    'field_image': 'preview_image',
+                                    'field_binary': 'preview_pdf'
+                                }"/>
+                    </group>
+                    <group>
+                        <field name="logo" widget="image" />
+                        <field name="report_header"  widget="char"
+                            placeholder="e.g. Global Business Solutions" />
+                        <field name="footer_logo" widget="image" />
+                        <field name="report_footer" string="Footer"
+                            placeholder="e.g. Opening hours, bank accounts (one per line)" />
+                        <field name="paperformat_id" widget="selection" />
+                    </group>
+                    <footer>
+                        <button special="save" string="Save"
+                                class="btn btn-primary" type="object" />
+                        <button special="cancel" string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+  </data>
+</odoo>

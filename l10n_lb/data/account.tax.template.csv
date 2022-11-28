@@ -1,0 +1,3 @@
+id,name,active,type_tax_use,amount_type,amount,account_id/id,refund_account_id/id,description,tax_group_id/id,chart_template_id/id,vat_tax
+azkatech_account_tax_lb_4,VAT Sales,TRUE,Sales,percent,11,azkatech_COA_lb_216,azkatech_COA_lb_216,VAT 11%,azkatech_tax_group_lb_11,lebanese_chart_template_standard,TRUE
+azkatech_account_tax_lb_5,VAT Purchase,TRUE,Purchases,percent,11,azkatech_COA_lb_217,azkatech_COA_lb_217,VAT 11%,azkatech_tax_group_lb_11,lebanese_chart_template_standard,TRUE

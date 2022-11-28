@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="action_azk_sales_division_open_division_views" model="ir.actions.act_window">
+		<field name="name">Divisions</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">azk_sales_division.division</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				Create a new division
+			</p>
+		</field>
+	</record>
+
+	<menuitem id="menu_azk_sales_division_division_sale" name="Divisions" sequence="2"
+		action="action_azk_sales_division_open_division_views"
+		parent="sale.menu_sale_config" />
+		
+	<menuitem id="menu_azk_sales_division_division_crm" name="Divisions" sequence="2"
+		action="action_azk_sales_division_open_division_views"
+		parent="crm.crm_menu_config" />
+		
+	
+</odoo>

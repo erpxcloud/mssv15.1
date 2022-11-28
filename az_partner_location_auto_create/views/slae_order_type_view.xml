@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_order_type_view_search" model="ir.ui.view">
+        <field name="name">sale.order.type.search</field>
+        <field name="model">sale.order.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Quotation Type">
+                <field name="name"/>
+                <filter string="Archived" name="inactive" domain="[('active','=', False)]"/>
+            </search>
+        </field>
+    </record>
+	<record id="view_sale_order_type_group_form" model="ir.ui.view">
+		<field name="name">sale.order.type.form</field>
+		<field name="model">sale.order.type</field>
+		<field name="arch" type="xml">
+			<form string="Sales Order Type">
+			  <sheet>
+                    <div name="button_box" class="oe_button_box"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <div class="oe_title">
+                       <h1>
+                         <field required="1" name="name" string ="Name"/>
+                       </h1>
+			       
+				       <group>
+				        <field name="active" invisible="1"/>
+				      	<field required="1" name="default_stok_location" string="Location"/>
+				      	<field required="1" name="set_price_to_zero" string="Free Sale Type"/>
+				      	<field required="1" name="related_to_transfer"/>
+				      	<field required="1" name="company_id"/>
+				      	
+				       </group>
+			        </div>
+			  </sheet>
+			</form>
+			</field>
+		
+ 	</record>
+
+
+	<record id="action_sales_order_type_tree"
+		model="ir.actions.act_window">
+		<field name="name">Sale Order Type</field>
+		<field name="res_model">sale.order.type</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="sale_order_type_view_search" />
+		<field name="help" type="html">
+			<field name="name"/>
+			<field name="default_stok_location"/>
+		</field>
+	</record>
+
+	<menuitem id="menu_sales_order_type" name="Sale Order Type"
+		parent="sale.menu_sale_config" action="action_sales_order_type_tree"
+		sequence="2" />
+
+</odoo>

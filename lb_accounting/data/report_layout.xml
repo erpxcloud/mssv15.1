@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_layout_lebanese" model="report.layout">
+        	<field name="name">Lebanese Layout</field>
+            <field name="view_id" ref="lb_accounting.external_layout_lebanese"/>
+            <field name="image">/lb_accounting/static/img/preview_lebanese_layout.png</field>
+            <field name="pdf">/lb_accounting/static/pdf/preview_lebanese_layout.pdf</field>
+        </record>
+        <record id="report_layout_lebanese_center" model="report.layout">
+        	<field name="name">Lebanese Center Layout</field>
+            <field name="view_id" ref="lb_accounting.external_layout_lebanese_center"/>
+            <field name="image">/lb_accounting/static/img/preview_lebanese_center_layout.png</field>
+            <field name="pdf">/lb_accounting/static/pdf/preview_lebanese_center_layout.pdf</field>
+        </record>
+        <record id="report_layout_letter_head" model="report.layout">
+        	<field name="name">Lebanese Letter Head Layout</field>
+            <field name="view_id" ref="lb_accounting.external_layout_letter_head"/>
+            <field name="image">/lb_accounting/static/img/preview_report_layout_letter_head.png</field>
+            <field name="pdf">/lb_accounting/static/pdf/preview_report_layout_letter_head.pdf</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,50 @@
+<odoo>
+	<data>
+		<template id="inherit_search_template_journals" inherit_id="account_reports.search_template_journals">
+            <xpath expr="//div[@class='dropdown-menu o_filters_menu']" position="replace">
+	       		<div class="dropdown-menu o_filters_menu" role="menu">
+		            <t t-foreach="options['journals']" t-as="j">
+		                <t t-if="j.get('id') == 'divider'">
+		                    <div role="separator" class="dropdown-divider"/>
+		                    <b role="menuitem" class="ml4 dropdown-item-text"><t t-esc="j.get('name')"/></b>
+		                    <div role="separator" class="dropdown-divider"/>
+		                </t>
+		                <t t-if="j.get('id') != 'divider'">
+		                	<t t-if="j.get('id') == 'selectall'">
+				            	<t t-if="len([journal for journal in options['journals'] if ('selected' in journal and journal['selected'] == True) or 'selected' not in journal]) == len(options['journals'])">
+				            		<a role="menuitem" class="ml4 dropdown-item selectalljournals" style="display:none"  t-att-title="j.get('id')" t-att-data-id="j.get('id')" data-filter="journals"><t t-esc="j.get('name')"/></a>
+				            		<div role="separator" class="dropdown-divider"/>
+				            	</t>
+				            	<t t-else="">
+				            		<a role="menuitem" class="ml4 dropdown-item selectalljournals" t-att-title="j.get('id')" t-att-data-id="j.get('id')" data-filter="journals"><t t-esc="j.get('name')"/></a>
+				            		<div role="separator" class="dropdown-divider"/>
+				            	</t>
+	
+				       		</t>
+				       		<t t-elif="j.get('id') == 'deselectall'">
+				       			<t t-if="len([journal for journal in options['journals'] if ('selected' in journal and journal['selected'] == True) or 'selected' not in journal]) == len(options['journals'])">
+				            		<a role="menuitem" class="ml4 dropdown-item deselectalljournals"  t-att-title="j.get('id')" t-att-data-id="j.get('id')" data-filter="journals"><t t-esc="j.get('name')"/></a>
+				            	<div role="separator" class="dropdown-divider"/>
+				            	</t>
+				            	<t t-else="">
+				            		<a role="menuitem" class="ml4 dropdown-item deselectalljournals" style="display:none" t-att-title="j.get('id')" t-att-data-id="j.get('id')" data-filter="journals"><t t-esc="j.get('name')"/></a>
+				            		<div role="separator" class="dropdown-divider"/>
+				            	</t>
+				       		</t>
+		                    <t t-elif="j.get('id') == 'group'">
+		                        <a role="menuitem" class="dropdown-item js_account_report_group_choice_filter" data-filter="journals" t-att-data-id="j.get('id')" t-att-data-member-ids="j.get('ids')">
+		                            <t t-esc="j.get('name')"/>
+		                        </a>
+		                    </t>
+		                    <t t-else="">
+		                        <a role="menuitem" class="dropdown-item js_account_report_choice_filter" t-att-title="j.get('name')+ '-' + j.get('code')" t-att-data-id="j.get('id')" data-filter="journals">
+		                            <t t-esc="j.get('name')"/>
+		                        </a>
+		                    </t>
+		                </t>
+		            </t>
+		        </div>
+            </xpath>
+        </template>
+	</data>
+</odoo>

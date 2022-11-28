@@ -1,0 +1,45 @@
+body{
+    font-family: "Times New Roman", Times, serif !important;
+    color: #000 !important;
+}
+
+h2{
+	margin: 0 !important;
+}
+
+h2, h2 span, h3, h3 span{
+	font-size: 1.625rem !important;
+	color: #000 !important;
+	font-family: "Times New Roman", Times, serif !important;
+}
+
+span, p, label{
+	font-size:11px !important;
+	color: #000 !important;
+	font-family: "Times New Roman", Times, serif !important;
+}
+
+table, table > td, table > th, table > tr{
+	color: #000 !important;
+	font-size:11px !important;
+	font-family: "Times New Roman", Times, serif !important;
+	border-color: #ccc !important
+}
+
+.o_total > td{
+	color: #000 !important;
+	background-color: #e9ecef !important;
+	font-family: "Times New Roman", Times, serif !important;
+}
+
+.o_boxed_footer {
+    margin-top: 0 !important;
+    white-space: nowrap;
+    border-top: 1px solid #e9ecef!important;
+}
+
+.o_report_layout_boxed .row > div > table tr:last-child td, .o_report_layout_boxed .row > div > table tr.o_total td, .o_report_layout_boxed div#total table tr:last-child td, .o_report_layout_boxed div#total table tr.o_total td {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: #000 !important;
+    font-weight: bold  !important;
+}

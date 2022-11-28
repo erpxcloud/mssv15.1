@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_account_form_inherit" model="ir.ui.view">
+            <field name="name">account.account.form.inherit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form//sheet/group" position="after">
+                        <notebook>
+                            <page id="non_auth_user_tab" string="Non Authorized Users">
+                                <field name="non_auth_user_ids" mode="tree" context="{'default_account_id': active_id}">
+                                    <tree editable="bottom" string="Non Authorized Users">
+                                        <field name="user_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="allow_create_journal"/>
+                                        <field name="account_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </xpath>
+                    <xpath expr="//form//sheet" position="after">
+                    	<div class="oe_chatter">
+			                <field name="message_follower_ids" widget="mail_followers"/>
+			                <field name="message_ids" widget="mail_thread"/>
+			            </div>
+                   	</xpath>
+                </data>
+            </field>
+        </record>
+	
+        <record id="view_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <data>
+					<!--Invoice Lines Page-->
+                    <xpath expr="//page[@id='invoice_tab']//field[@name='invoice_line_ids']//field[@name='account_id']" position="attributes">
+                        <field name="id" invisible="1"/>
+                        <attribute name="context">{'item_id': id}</attribute>
+                    </xpath>
+
+                    <!--Journal Items Page-->
+                    <xpath expr="//page[@id='aml_tab']//field[@name='line_ids']//field[@name='account_id']" position="attributes">
+                        <field name="id" invisible="1"/>
+						
+                        <attribute name="context">{'item_id': id}</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

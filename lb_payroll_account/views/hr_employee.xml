@@ -1,0 +1,22 @@
+<odoo>
+	<data>
+		<record id="view_employee_form_inherit" model="ir.ui.view">
+	            <field name="name">hr.employee.form.inherit</field>
+	            <field name="model">hr.employee</field>
+	            <field name="inherit_id" ref="hr.view_employee_form"/>
+	            <field name="arch" type="xml">
+					<page name="hr_settings" position="after">
+						<page name="accounting" string="Accounting" groups="hr.group_hr_user">
+							<field name="employee_account" string="Salary Rule Accounts">
+								<tree editable="bottom">
+									<field name="salary_rule" required="1" options="{'no_create': True, 'no_open': True}"></field>
+									<field name="credit_account"  options="{'no_create': True, 'no_open': True}"></field>
+									<field name="debit_account"  options="{'no_create': True, 'no_open': True}"></field>
+								</tree>
+							</field>
+						</page>
+					</page>
+				</field>
+		</record>
+	</data>
+</odoo>

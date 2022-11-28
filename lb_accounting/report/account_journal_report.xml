@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            id="action_report_journal"
+            string="Journal Voucher"
+            model="account.move" 
+            report_type="qweb-pdf"
+            name="lb_accounting.report_journal"
+            file="lb_accounting.report_journal"
+            print_report_name="(object.state in ('draft') and 'Draft Journal Voucher') or 'Journal Voucher - %s' % (object.name)"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="closing_voucher_form" model="ir.actions.act_window">
+		<field name="name">Generate Closing Entry</field>
+		<field name="res_model">voucher.closing.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+	<menuitem name="Generate Closing Entry"
+		action="closing_voucher_form"
+		id="menu_action_closing_voucher"
+		parent="account.menu_finance_entries_generate_entries" sequence="112"
+		groups="account.group_account_manager" />
+</odoo>
