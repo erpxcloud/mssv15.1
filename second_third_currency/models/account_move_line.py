@@ -136,6 +136,15 @@ class StockPicking(models.Model):
         for valuation in self.move_lines.stock_valuation_layer_ids.account_move_id:
             valuation.get_debit_credit()
         return res
+    
+    
+class AccountPaymentInherit(models.Model):
+    _inherit = 'account.payment'
+
+    second_amount = fields.Monetary(string='Second Amount', default=0.0)
+    third_amount = fields.Monetary(string='Third Amount', default=0.0)
+    second_currency = fields.Many2one('res.currency', related="company_id.second_currency")
+    third_currency = fields.Many2one('res.currency', related="company_id.third_currency")
         
     
 
