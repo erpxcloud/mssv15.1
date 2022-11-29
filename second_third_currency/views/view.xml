@@ -63,5 +63,27 @@
 
             </field>
         </record>
+        
+             <record id="inherit_view_account_payment_amount" model="ir.ui.view">
+            <field name="name">inherit.view.account.payment.amount</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <label for="second_amount"/>
+                    <div name="second_amount_div" class="o_row">
+                        <field name="second_amount" attrs="{'readonly': [('state', '!=', 'draft')]}" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                        <field name="second_currency" invisible="1"/> 
+                       <field name="second_currency" options="{'no_create': True, 'no_open': True}" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="base.group_multi_currency"/>
+                    </div>
+                    <label for="third_amount"/>
+                    <div name="third_amount_div" class="o_row">
+                        <field name="third_amount" attrs="{'readonly': [('state', '!=', 'draft')]}" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                         <field name="third_currency" invisible="1"/> 
+                       <field name="third_currency" options="{'no_create': True, 'no_open': True}" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="base.group_multi_currency"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
