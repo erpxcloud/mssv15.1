@@ -86,7 +86,7 @@
             </field>
         </record>
         
-<!--             <record id="wizard_account_payment_inherit111" model="ir.ui.view">
+             <record id="wizard_account_payment_inherit111" model="ir.ui.view">
 			<field name="name">wizard.account.payment.inherit111</field>
 			<field name="model">account.payment.register</field>
 			<field name="inherit_id" ref="account.view_account_payment_register_form"/>
@@ -102,8 +102,8 @@
 						<field name="third_amount" required="1"/>
                         <field name="third_currency" readonly="1"/>
 					</div> -->
-<!-- 				</xpath>
+ 				</xpath>
 			</field>
-		</record> -->
+		</record> 
     </data>
 </odoo>
