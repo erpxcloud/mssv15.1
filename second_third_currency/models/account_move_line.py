@@ -147,11 +147,11 @@ class AccountPaymentInherit(models.Model):
     third_currency = fields.Many2one('res.currency', related="company_id.third_currency")
     
     
- class AccountPaymentRegister(models.TransientModel):
-    _inherit = 'account.payment.register'
+#  class AccountPaymentRegister(models.TransientModel):
+#     _inherit = 'account.payment.register'
     
-    second_currency = fields.Many2one('res.currency', related="company_id.second_currency")
-    third_currency = fields.Many2one('res.currency', related="company_id.third_currency")
+#     second_currency = fields.Many2one('res.currency', related="company_id.second_currency")
+#     third_currency = fields.Many2one('res.currency', related="company_id.third_currency")
 #     second_amount = fields.Monetary(currency_field='second_currency', string='Second Amount', default=0.0, store=True,
 #                                     compute="exchange_second_amount_wiz")
 #     third_amount = fields.Monetary(currency_field='third_currency', string='Third Amount', default=0.0, store=True,
