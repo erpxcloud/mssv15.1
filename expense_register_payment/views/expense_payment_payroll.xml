@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+       <!-- Add second and third Amount in hr expense sheet -->
+        <record id="view_hr_expense_sheet_form_inherit" model="ir.ui.view">
+			<field name="name">view.hr.expense.sheet.form.inherit</field>
+			<field name="model">hr.expense.sheet</field>
+			<field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="inside">
+                    <field name="second_currency" invisible="1"/>
+                    <field name="third_currency" invisible="1"/>
+                    <field name="second_amount" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                    <field name="third_amount" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                    <attribute name="context">
+                            {'default_second_amount': second_amount, 'default_third_amount': third_amount}
+                        </attribute>
+                </xpath>
+			</field>
+		</record>
+    </data>
+</odoo>
