@@ -154,8 +154,8 @@ class AccountPaymentRegister(models.TransientModel):
     third_currency = fields.Many2one('res.currency', related="company_id.third_currency")
     second_amount = fields.Monetary(currency_field='second_currency', string='Second Amount', default=0.0, store=True,
                                     compute="exchange_second_amount_wiz")
-#     third_amount = fields.Monetary(currency_field='third_currency', string='Third Amount', default=0.0, store=True,
-#                                     compute="exchange_third_amount_wiz")
+    third_amount = fields.Monetary(currency_field='third_currency', string='Third Amount', default=0.0, store=True,
+                                    compute="exchange_third_amount_wiz")
     
     @api.depends('amount')
     def exchange_second_amount_wiz(self):
@@ -163,17 +163,17 @@ class AccountPaymentRegister(models.TransientModel):
             second = wizard.env['res.currency'].search([('id', '=', wizard.company_id.second_currency.id)])
             wizard.second_amount = wizard.currency_id.compute(wizard.amount, second)
             
-#     @api.depends('amount')
-#     def exchange_third_amount_wiz(self):
-#         for wizard in self:
-#             third = wizard.env['res.currency'].search([('id', '=', wizard.company_id.third_currency.id)])
-#             wizard.third_amount = wizard.currency_id.compute(wizard.amount, third)
+    @api.depends('amount')
+    def exchange_third_amount_wiz(self):
+        for wizard in self:
+            third = wizard.env['res.currency'].search([('id', '=', wizard.company_id.third_currency.id)])
+            wizard.third_amount = wizard.currency_id.compute(wizard.amount, third)
             
-#     def _create_payment_vals_from_wizard(self):
+    def _create_payment_vals_from_wizard(self):
       
-#         payment_vals = super()._create_payment_vals_from_wizard()
-#         payment_vals['second_amount'] = self.second_amount
-#         return payment_vals  
+        payment_vals = super()._create_payment_vals_from_wizard()
+        payment_vals['second_amount'] = self.second_amount
+        return payment_vals  
         
     
 
