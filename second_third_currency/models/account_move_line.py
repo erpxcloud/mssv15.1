@@ -152,16 +152,16 @@ class AccountPaymentInherit(models.Model):
     
     second_currency = fields.Many2one('res.currency', related="company_id.second_currency")
     third_currency = fields.Many2one('res.currency', related="company_id.third_currency")
-    second_amount = fields.Monetary(currency_field='second_currency', string='Second Amount', default=0.0, store=True,
-                                    compute="exchange_second_amount_wiz")
+#     second_amount = fields.Monetary(currency_field='second_currency', string='Second Amount', default=0.0, store=True,
+#                                     compute="exchange_second_amount_wiz")
 #     third_amount = fields.Monetary(currency_field='third_currency', string='Third Amount', default=0.0, store=True,
 #                                     compute="exchange_third_amount_wiz")
     
-    @api.depends('amount')
-    def exchange_second_amount_wiz(self):
-        for wizard in self:
-            second = wizard.env['res.currency'].search([('id', '=', wizard.company_id.second_currency.id)])
-            wizard.second_amount = wizard.currency_id.compute(wizard.amount, second)
+#     @api.depends('amount')
+#     def exchange_second_amount_wiz(self):
+#         for wizard in self:
+#             second = wizard.env['res.currency'].search([('id', '=', wizard.company_id.second_currency.id)])
+#             wizard.second_amount = wizard.currency_id.compute(wizard.amount, second)
             
 #     @api.depends('amount')
 #     def exchange_third_amount_wiz(self):
