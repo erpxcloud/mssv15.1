@@ -45,7 +45,7 @@
                     <field name="second_currency" invisible="1"/>
                     <field name="third_currency" invisible="1"/>
                     <field name="second_amount" widget='monetary' options="{'currency_field': 'second_currency'}"/>
-                    <field name="third_amount" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+<!--                     <field name="third_amount" widget='monetary' options="{'currency_field': 'third_currency'}"/> -->
                 </xpath>
 
             </field>
