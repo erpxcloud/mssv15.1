@@ -97,11 +97,11 @@
                                 <field name="second_amount" widget='monetary' options="{'currency_field': 'second_currency'}"/>
                                 <field name="second_currency" required="1"/>
                             </div> -->
-<!-- 					<label for="third_amount"/>
+					<label for="third_amount"/>
 					<div name="third_amount_div" class="o_row">
 						<field name="third_amount" required="1"/>
                         <field name="third_currency" readonly="1"/>
-					</div> -->
+					</div>
  				</xpath>
 			</field>
 		</record> 
