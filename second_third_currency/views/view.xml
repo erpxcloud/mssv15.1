@@ -41,6 +41,12 @@
                      <field name="third_balance" optional="show" widget='monetary' options="{'currency_field': 'third_currency'}"/>
                     <field name="second_balance" optional="show" widget='monetary' options="{'currency_field': 'second_currency'}"/>
                 </xpath>
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="inside">    
+                    <field name="second_currency" invisible="1"/>
+                    <field name="third_currency" invisible="1"/>
+                    <field name="second_amount" widget='monetary' options="{'currency_field': 'second_currency'}"/>
+                    <field name="third_amount" widget='monetary' options="{'currency_field': 'third_currency'}"/>
+                </xpath>
 
             </field>
         </record>
