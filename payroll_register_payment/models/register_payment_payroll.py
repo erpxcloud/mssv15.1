@@ -9,8 +9,8 @@ class AccountPayment(models.Model):
 
 class RegisterPaymentPayslips(models.Model):
     _inherit = 'hr.payslip'
-    
-     payment_method_id = fields.Many2one('account.payment.method', string='Payment Type', required=True)
+
+    payment_method_id = fields.Many2one('account.payment.method', string='Payment Type', required=True)
 
     def _compute_payment(self):
         payment_obj = self.env['account.payment']
@@ -37,8 +37,8 @@ class RegisterPaymentPayslips(models.Model):
                 'payroll_slip_id': self.id,
 
             }
-            payment = self.env['account.payment'].create(payment_values)
-            payment.action_post()
+        payment = self.env['account.payment'].create(payment_values)
+        payment.action_post()
 
     def _compute_paid_state(self):
         self.is_paid = False
