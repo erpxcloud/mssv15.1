@@ -26,7 +26,6 @@ class RegisterPaymentPayslips(models.Model):
     def _compute_pay_amount(self):
         line_obj = self.env['hr.payslip.line']
         for slip in line_obj:
-            pay_amount = 0.0
             payoff = slip.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
             self.pay_amount = payoff.total
 
