@@ -24,13 +24,12 @@ class RegisterPaymentPayslips(models.Model):
         self.payment_id = payment_obj.search([('payroll_slip_id', '=', self.id)])
 
     def _compute_pay_amount(self):
-        line_obj = self.env['hr.payslip.line']
-        for slip in line_obj:
-            total_amount_new = 0.0
+        for slip in self:
+            pay_amount_new = 0.0
             for line in slip.line_ids:
                 if line.salary_rule_id.code == 'NET':
-                    total_amount_new+=line.total
-            slip.pay_amount = total_amount_new
+                    payl_amount_new+=line.total
+            slip.pay_amount = pay_amount_new
 
     def register_payment(self):
         value_amount = self.pay_amount
