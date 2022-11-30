@@ -17,19 +17,10 @@ class AccountPayment(models.Model):
 class RegisterPaymentPayslips(models.Model):
     _inherit = 'hr.payslip'
 
-    #     payment_method_id = fields.Many2one('account.payment.method', string='Payment Type', required=True)
 
     def _compute_payment(self):
         payment_obj = self.env['account.payment']
         self.payment_id = payment_obj.search([('payroll_slip_id', '=', self.id)])
-
-    #     def _compute_pay_amount(self):
-    #         for slip in self:
-    #             pay_amount_new = 0.0
-    #             for line in slip.line_ids:
-    #                 if line.salary_rule_id.code == 'NET':
-    #                     payl_amount_new+=line.total
-    #             slip.pay_amount = pay_amount_new
 
     def _compute_pay_amount(self):
         line_obj = self.env['hr.payslip.line']
@@ -67,7 +58,19 @@ class RegisterPaymentPayslips(models.Model):
     pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
 
+class RegisterPaymentPayslips(models.Model):
+    _inherit = 'hr.payslip.run'
 
+
+    batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment')
+    is_batch_paid = fields.Boolean(string='Paid Payslips', store=True)
+
+    def batch_register_payment(self):
+        if self.state == 'done':
+            for payslip in self.slip_ids:
+                payslip.register_payment(payslip)
+            self.is_batch_paid = True
+    
 class AccountPayment(models.Model):
     _inherit = 'hr.contract'
 
