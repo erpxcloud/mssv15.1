@@ -26,22 +26,18 @@ class RegisterPaymentPayslips(models.Model):
                 'partner_type': 'supplier',
                 'payment_type': 'outbound',
                 'partner_id': self.employee_id.address_home_id.id,
-                # 'journal_id': self.journal_id.id,
+                'journal_id': self.journal_id.id,
                 'company_id': self.company_id.id,
-                # 'payment_method_id': self.payment_method_id.id,
+                'payment_method_id': self.payment_method_id.id,
                 'amount': value_amount,
-                # 'currency_id': self.currency_id.id,
-                # 'payment_date': self.date_to,
+                'currency_id': self.currency_id.id,
                 'date': self.date_to,
                 'ref': self.number + ' - ' + self.name,
                 'payroll_slip_id': self.id,
-                # 'communication': self.number + ' - ' + self.name,
-                # 'writeoff_label': 'Payslip Payment'
+
             }
             payment = self.env['account.payment'].create(payment_values)
-            print('payslip***********', self.id)
             payment.action_post()
-            # return payment
 
     def _compute_paid_state(self):
         self.is_paid = False
@@ -49,6 +45,7 @@ class RegisterPaymentPayslips(models.Model):
             self.is_paid = True
 
     is_paid = fields.Boolean('Paid Payment ', states={'draft': [('readonly', False)]}, compute="_compute_paid_state")
-
+    currency_id = fields.Many2one('res.currency', string='Currency', required=True,
+                                  default=lambda self: self.env.user.company_id.currency_id)
     pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
