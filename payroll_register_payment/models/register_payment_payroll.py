@@ -58,7 +58,7 @@ class RegisterPaymentPayslips(models.Model):
     pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
 
-class RegisterPaymentPayslips(models.Model):
+class RegisterPaymentBatch(models.Model):
     _inherit = 'hr.payslip.run'
 
 
@@ -71,11 +71,11 @@ class RegisterPaymentPayslips(models.Model):
                 payslip.register_payment()
             self.is_batch_paid = True
     
-class AccountPayment(models.Model):
+class HrContract(models.Model):
     _inherit = 'hr.contract'
 
     mobile = fields.Char(string='Mobile')
     
-class AccountPayment(models.Model):
+class HrEmployee(models.Model):
     _inherit = 'hr.employee'
     subjected_to_mof = fields.Boolean(string='Subjected to MOF')
