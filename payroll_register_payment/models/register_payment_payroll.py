@@ -1,22 +1,17 @@
 from odoo import fields, models, api
 
-
-class AccountPayment(models.Model):
-    _inherit = 'hr.contract'
-
-    mobile = fields.char(string='Mobile')
     
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
     payroll_slip_id = fields.Many2one('hr.payslip')
-#     visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
+    visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
     
-#     def compute_visibility(self):
-#         for payment in self:
-#             self.visible_payroll_slip_id = False
-#             if self.payroll_slip_id:
-#                 self.visible_payroll_slip_id = True
+    def compute_visibility(self):
+        for payment in self:
+            self.visible_payroll_slip_id = False
+            if self.payroll_slip_id:
+                self.visible_payroll_slip_id = True
 
 
 class RegisterPaymentPayslips(models.Model):
@@ -71,3 +66,9 @@ class RegisterPaymentPayslips(models.Model):
                                   default=lambda self: self.env.user.company_id.currency_id)
     pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
+    
+class AccountPayment(models.Model):
+    _inherit = 'hr.contract'
+
+    mobile = fields.char(string='Mobile')    
+    
