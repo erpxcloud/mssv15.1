@@ -68,7 +68,7 @@ class RegisterPaymentPayslips(models.Model):
     def batch_register_payment(self):
         if self.state == 'done':
             for payslip in self.slip_ids:
-                payslip.register_payment(payslip)
+                payslip.register_payment()
             self.is_batch_paid = True
     
 class AccountPayment(models.Model):
