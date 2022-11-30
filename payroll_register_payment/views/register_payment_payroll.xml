@@ -16,9 +16,9 @@
                 </xpath>
 
                 <xpath expr="//field[@name='paid']" position="before">
-                    <field name="pay_amount" readonly="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="pay_amount" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                     <field name="payment_id" readonly="1"/>
-                    <!--          <field name="reconciled" readonly="1"/>-->
                 </xpath>
             </field>
         </record>
