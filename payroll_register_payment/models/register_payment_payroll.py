@@ -72,3 +72,7 @@ class AccountPayment(models.Model):
     _inherit = 'hr.contract'
 
     mobile = fields.Char(string='Mobile')
+    
+class AccountPayment(models.Model):
+    _inherit = 'hr.employee'
+    subjected_to_mof = fields.Boolean(string='Subjected to MOF',default=True, groups="hr.group_hr_user")
