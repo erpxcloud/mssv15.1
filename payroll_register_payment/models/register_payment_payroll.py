@@ -69,6 +69,6 @@ class RegisterPaymentPayslips(models.Model):
 
 
 class AccountPayment(models.Model):
-    _inherit = 'hr.contract.history'
+    _inherit = 'hr.contract'
 
-    mobile = fields.char(string='Mobile')
+    mobile = fields.Char(string='Mobile')
