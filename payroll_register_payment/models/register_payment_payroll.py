@@ -5,6 +5,12 @@ class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
     payroll_slip_id = fields.Many2one('hr.payslip')
+    visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
+    
+    def compute_visibility(self):
+        self.visible_payroll_slip_id = False
+        if self.payroll_slip_id:
+            self.visible_payroll_slip_id = True
 
 
 class RegisterPaymentPayslips(models.Model):
@@ -49,5 +55,5 @@ class RegisterPaymentPayslips(models.Model):
     is_paid = fields.Boolean('Paid Payment ', states={'draft': [('readonly', False)]}, compute="_compute_paid_state")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.user.company_id.currency_id)
-    pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount')
+    pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', store='True')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
