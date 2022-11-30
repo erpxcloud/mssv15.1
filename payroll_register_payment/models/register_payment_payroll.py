@@ -9,6 +9,8 @@ class AccountPayment(models.Model):
 
 class RegisterPaymentPayslips(models.Model):
     _inherit = 'hr.payslip'
+    
+     payment_method_id = fields.Many2one('account.payment.method', string='Payment Type', required=True)
 
     def _compute_payment(self):
         payment_obj = self.env['account.payment']
@@ -28,7 +30,7 @@ class RegisterPaymentPayslips(models.Model):
                 'partner_id': self.employee_id.address_home_id.id,
                 'journal_id': self.journal_id.id,
                 'company_id': self.company_id.id,
-                'payment_method_id': self.payment_method_id.id,
+#                 'payment_method_id': self.payment_method_id.id,
                 'amount': value_amount,
                 'currency_id': self.currency_id.id,
                 'date': self.date_to,
