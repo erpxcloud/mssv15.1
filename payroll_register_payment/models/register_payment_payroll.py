@@ -63,13 +63,13 @@ class RegisterPaymentBatch(models.Model):
 
 
     batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment')
-    is_batch_paid = fields.Boolean(string='Paid Payslips', store=True)
+    is_batch_paid = fields.Boolean(string='Paid Payslips')
 
     def batch_register_payment(self):
         if self.state == 'done':
             for payslip in self.slip_ids:
                 payslip.register_payment()
-            self.is_batch_paid = True
+            
     
 class HrContract(models.Model):
     _inherit = 'hr.contract'
