@@ -32,7 +32,7 @@
                     <button string="Register Payment" name="batch_register_payment" type="object" class="oe_highlight"
                             attrs="{'invisible':['|',('batch_payment_id','!=',False),('state','!=','done')]}"/>
                 </xpath>
-                <xpath expr="//field[@name='date_to']" position="after">
+                <xpath expr="//field[@name='company_id']" position="before">
                     <field name="is_batch_paid" readonly="1"/>
                     <field name="batch_payment_id" readonly="1"/>
                 </xpath>
