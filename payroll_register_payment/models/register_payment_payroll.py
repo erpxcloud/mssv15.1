@@ -8,9 +8,10 @@ class AccountPayment(models.Model):
     visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
     
     def compute_visibility(self):
-        self.visible_payroll_slip_id = False
-        if self.payroll_slip_id:
-            self.visible_payroll_slip_id = True
+        for payment in self:
+            self.visible_payroll_slip_id = False
+            if self.payroll_slip_id:
+                self.visible_payroll_slip_id = True
 
 
 class RegisterPaymentPayslips(models.Model):
