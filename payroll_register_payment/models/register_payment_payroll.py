@@ -64,5 +64,5 @@ class RegisterPaymentPayslips(models.Model):
     is_paid = fields.Boolean('Paid Payment ', states={'draft': [('readonly', False)]}, compute="_compute_paid_state")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.user.company_id.currency_id)
-    pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', store='True')
+    pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
