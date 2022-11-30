@@ -22,7 +22,23 @@
                 </xpath>
             </field>
         </record>
-
+        
+        <record id="hr_payslip_run_form_payment11" model="ir.ui.view">
+            <field name="name">hr.payslip.run.form.payment11</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_validate']" position="after">
+                    <button string="Register Payment" name="register_payment" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('batch_payment_id','!=',False),('state','!=','done')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='date_to']" position="after">
+                    <field name="is_batch_paid" readonly="1"/>
+                    <field name="batch_payment_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+        
         <record id="view_payroll_payment_form_ec" model="ir.ui.view">
             <field name="name">view_payroll_payment_form_ec</field>
             <field name="model">account.payment</field>
