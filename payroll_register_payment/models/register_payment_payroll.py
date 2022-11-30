@@ -2,16 +2,21 @@ from odoo import fields, models, api
 
 
 class AccountPayment(models.Model):
+    _inherit = 'hr.contract'
+
+    mobile = fields.char(string='Mobile')
+    
+class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
     payroll_slip_id = fields.Many2one('hr.payslip')
-    visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
+#     visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
     
-    def compute_visibility(self):
-        for payment in self:
-            self.visible_payroll_slip_id = False
-            if self.payroll_slip_id:
-                self.visible_payroll_slip_id = True
+#     def compute_visibility(self):
+#         for payment in self:
+#             self.visible_payroll_slip_id = False
+#             if self.payroll_slip_id:
+#                 self.visible_payroll_slip_id = True
 
 
 class RegisterPaymentPayslips(models.Model):
