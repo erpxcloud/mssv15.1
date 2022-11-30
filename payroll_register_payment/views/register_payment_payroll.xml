@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Button on Payslip register payment -->
+        <record id="hr_payslip_form_payment11" model="ir.ui.view">
+            <field name="name">hr.payslip.form.payment11</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='refund_sheet']" position="after">
+                    <button string="Register Payment" name="register_payment" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('payment_id','!=',False),('state','!=','done')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="is_paid" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='paid']" position="before">
+                    <field name="pay_amount" readonly="1"/>
+                    <field name="payment_id" readonly="1"/>
+                    <!--          <field name="reconciled" readonly="1"/>-->
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_payroll_payment_form_ec" model="ir.ui.view">
+            <field name="name">view_payroll_payment_form_ec</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                        <field name="payroll_slip_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
