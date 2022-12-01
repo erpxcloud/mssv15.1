@@ -87,9 +87,9 @@ class RegisterPaymentBatch(models.Model):
                 payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)], limit=1)
                 payments.append(payment)
                 batch_values = {
-                    # 'journal_id': journal_id.id,
+                    'journal_id': payment[0].journal_id.id,
                     'payment_ids': [(4, payment.id, None) for payment in payments if payment.amount != 0],
-                    # 'payment_method_id': payment_method_id.id,
+                    'payment_method_id': payment[0].payment_method_id.id,
                     'date': batch_id.date_end,
                     'batch_type': 'outbound',
                     'payroll_batch_id': batch_id.id
