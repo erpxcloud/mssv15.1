@@ -40,7 +40,7 @@ class RegisterPaymentPayslips(models.Model):
     
     def register_payment(self):
         value_amount = self.pay_amount
-        if self.state == 'done':
+        if self.state == 'done' and value_amount != 0.00:
             payment_values = {
                 'partner_type': 'supplier',
                 'payment_type': 'outbound',
@@ -86,15 +86,15 @@ class RegisterPaymentBatch(models.Model):
             for payslip in batch_id.slip_ids:
                 payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)], limit=1)
                 payments.append(payment)
-                batch_values = {
-#                     'journal_id': payment[0].journal_id.id,
-                    'payment_ids': [(4, payment.id, None) for payment in payments if payment.amount != 0],
-#                     'payment_method_id': payment[0].payment_method_id.id,
+                batch_payment = batch_id.env['account.batch.payment'].create({
+                    'journal_id': payment[0].journal_id.id,
+                    'payment_ids': [(4, payment.id, None) for payment in payments],
+                    'payment_method_id': payment[0].payment_method_id.id,
                     'date': batch_id.date_end,
                     'batch_type': 'outbound',
-                    'payroll_batch_id': batch_id.id
-                }
-                batch_payment = batch_id.env['account.batch.payment'].create(batch_values)
+                    'payroll_batch_id': batch_id.id,
+                })
+#                 batch_payment = batch_id.env['account.batch.payment'].create(batch_values)
 #                 batch_payment.action_post
 
 
