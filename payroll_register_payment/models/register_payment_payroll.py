@@ -13,9 +13,10 @@ class AccountPayment(models.Model):
 
     def compute_visibility(self):
         for payment in self:
-            self.visible_payroll_slip_id = False
             if self.payroll_slip_id:
                 self.visible_payroll_slip_id = True
+            else:
+                self.visible_payroll_slip_id = False
 
 
 class RegisterPaymentPayslips(models.Model):
