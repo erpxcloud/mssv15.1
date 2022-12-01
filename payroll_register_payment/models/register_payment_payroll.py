@@ -4,6 +4,7 @@ import warnings
 
 _logger = logging.getLogger(__name__)
 
+
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
@@ -20,7 +21,6 @@ class AccountPayment(models.Model):
 class RegisterPaymentPayslips(models.Model):
     _inherit = 'hr.payslip'
 
-
     def _compute_payment(self):
         payment_obj = self.env['account.payment']
         self.payment_id = payment_obj.search([('payroll_slip_id', '=', self.id)])
@@ -28,8 +28,8 @@ class RegisterPaymentPayslips(models.Model):
     def _compute_pay_amount(self):
         for rec in self:
             for line in rec.line_ids:
-            payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
-            self.pay_amount = payoff.amount
+                payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
+            rec.pay_amount = payoff.amount
 
     def register_payment(self):
         value_amount = self.pay_amount
@@ -62,9 +62,9 @@ class RegisterPaymentPayslips(models.Model):
     pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id')
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
 
+
 class RegisterPaymentBatch(models.Model):
     _inherit = 'hr.payslip.run'
-
 
     batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment')
     is_batch_paid = fields.Boolean(string='Paid Payslips')
@@ -75,14 +75,14 @@ class RegisterPaymentBatch(models.Model):
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
             batch_id.is_batch_paid = True
-            
-            
-    
+
+
 class HrContract(models.Model):
     _inherit = 'hr.contract'
 
     mobile = fields.Char(string='Mobile')
-    
+
+
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
     subjected_to_mof = fields.Boolean(string='Subjected to MOF')
