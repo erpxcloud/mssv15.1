@@ -9,16 +9,12 @@ class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
     payroll_slip_id = fields.Many2one('hr.payslip', string='Payslip Payment')
-    visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
-
-    def compute_visibility(self):
-        for payment in self:
-            if self.payroll_slip_id:
-                self.visible_payroll_slip_id = True
-            else:
-                self.visible_payroll_slip_id = False
-
-
+    
+class AccountBatchPayment(models.Model):
+    _inherit = 'account.batch.payment'
+    
+    payroll_batch_id = fields.Many2one('hr.payslip', string='Batch Payment')
+    
 class RegisterPaymentPayslips(models.Model):
     _inherit = 'hr.payslip'
 
@@ -86,6 +82,20 @@ class RegisterPaymentBatch(models.Model):
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
             batch_id.is_batch_paid = True
+            payments = []
+            for payslip in batch_id.slip_ids:
+                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)], limit=1)
+                payments.append(payment)
+                batch_values = {
+                    # 'journal_id': journal_id.id,
+                    'payment_ids': [(4, payment.id, None) for payment in payments if payment.amount != 0],
+                    # 'payment_method_id': payment_method_id.id,
+                    'date': batch_id.date_end,
+                    'batch_type': 'outbound',
+                    'payroll_batch_id': batch_id.id
+                }
+                batch_payment = batc_id.env['account.batch.payment'].create(batch_values)
+                batch_payment.action_post
 
 
 class HrContract(models.Model):
