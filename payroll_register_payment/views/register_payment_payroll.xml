@@ -55,7 +55,7 @@
             <field name="inherit_id" ref="account_batch_payment.view_batch_payment_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='date']" position="after">
-                        <field name="payroll_batch_id"/>
+                        <field name="payroll_batch_id" attrs="{'invisible': [('payroll_batch_id', '=', False)]}"/>
                 </xpath>
             </field>
         </record> -->
