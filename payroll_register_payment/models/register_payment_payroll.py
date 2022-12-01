@@ -1,5 +1,8 @@
 from odoo import fields, models, api
+import logging
+import warnings
 
+_logger = logging.getLogger(__name__)
 
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
@@ -66,9 +69,12 @@ class RegisterPaymentBatch(models.Model):
     is_batch_paid = fields.Boolean(string='Paid Payslips')
 
     def batch_register_payment(self):
-        if self.state == 'done':
-            for payslip in self.slip_ids:
-                payslip.register_payment()
+        _logger.info(f'\n\n\n  START \n\n\n.')
+        for batch_id in self:
+            for payslip in batch_id.slip_ids:
+                payment_payslip = payslip.register_payment()
+                batch_id.is_batch_paid = True
+            
             
     
 class HrContract(models.Model):
