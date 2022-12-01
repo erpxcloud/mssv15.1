@@ -9,12 +9,14 @@ class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
     payroll_slip_id = fields.Many2one('hr.payslip', string='Payslip Payment')
-    
+
+
 class AccountBatchPayment(models.Model):
     _inherit = 'account.batch.payment'
-    
+
     payroll_batch_id = fields.Many2one('hr.payslip', string='Batch Payment')
-    
+
+
 class RegisterPaymentPayslips(models.Model):
     _inherit = 'hr.payslip'
 
@@ -22,11 +24,11 @@ class RegisterPaymentPayslips(models.Model):
         payment_obj = self.env['account.payment']
         self.payment_id = payment_obj.search([('payroll_slip_id', '=', self.id)])
 
-#     def _compute_pay_amount(self):
-#         for rec in self:
-#             for line in rec.line_ids:
-#                 payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
-#             rec.pay_amount = payoff.amount
+    #     def _compute_pay_amount(self):
+    #         for rec in self:
+    #             for line in rec.line_ids:
+    #                 payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
+    #             rec.pay_amount = payoff.amount
 
     @api.depends('line_ids')
     @api.onchange('line_ids')
@@ -35,9 +37,9 @@ class RegisterPaymentPayslips(models.Model):
             pay_amount_new = 0.0
             for line in slip.line_ids:
                 if line.code == 'NET':
-                    pay_amount_new+=line.total
+                    pay_amount_new += line.total
             slip.pay_amount = pay_amount_new
-    
+
     def register_payment(self):
         value_amount = self.pay_amount
         if self.state == 'done' and value_amount != 0.00:
@@ -72,12 +74,13 @@ class RegisterPaymentPayslips(models.Model):
 
 class RegisterPaymentBatch(models.Model):
     _inherit = 'hr.payslip.run'
-    
+
     def _compute_batch_payment(self):
         payment_batch_obj = self.env['account.batch.payment']
         self.batch_payment_id = payment_batch_obj.search([('payroll_batch_id', '=', self.id)])
 
-    batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment' compute="_compute_batch_payment")
+    batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment',
+                                       compute="_compute_batch_payment")
     is_batch_paid = fields.Boolean(string='Paid Payslips')
 
     def batch_register_payment(self):
@@ -96,7 +99,9 @@ class RegisterPaymentBatch(models.Model):
                 'date': batch_id.date_end,
                 'batch_type': 'outbound',
                 'payroll_batch_id': batch_id.id,
-                })
+            })
+
+
 #                 batch_payment.validate_batch_button()
 
 
