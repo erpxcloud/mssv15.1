@@ -25,12 +25,22 @@ class RegisterPaymentPayslips(models.Model):
         payment_obj = self.env['account.payment']
         self.payment_id = payment_obj.search([('payroll_slip_id', '=', self.id)])
 
-    def _compute_pay_amount(self):
-        for rec in self:
-            for line in rec.line_ids:
-                payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
-            rec.pay_amount = payoff.amount
+#     def _compute_pay_amount(self):
+#         for rec in self:
+#             for line in rec.line_ids:
+#                 payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
+#             rec.pay_amount = payoff.amount
 
+    @api.depends('line_ids')
+    @api.onchange('line_ids')
+    def _compute_pay_amount(self):
+        for slip in self:
+            pay_amount_new = 0.0
+            for line in slip.line_ids:
+                if line.salary_rule_id.code == 'NET':
+                    pay_amount_new+=line.total
+            slip.pay_amount = pay_amount_new
+    
     def register_payment(self):
         value_amount = self.pay_amount
         if self.state == 'done':
