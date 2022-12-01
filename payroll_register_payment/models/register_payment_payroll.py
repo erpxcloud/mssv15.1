@@ -26,9 +26,10 @@ class RegisterPaymentPayslips(models.Model):
         self.payment_id = payment_obj.search([('payroll_slip_id', '=', self.id)])
 
     def _compute_pay_amount(self):
-        line_obj = self.env['hr.payslip.line']
-        payoff = line_obj.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
-        self.pay_amount = payoff.amount
+        for rec in self:
+            for line in rec.line_ids:
+            payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
+            self.pay_amount = payoff.amount
 
     def register_payment(self):
         value_amount = self.pay_amount
