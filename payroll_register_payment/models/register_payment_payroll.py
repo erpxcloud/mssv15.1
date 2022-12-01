@@ -99,7 +99,7 @@ class RegisterPaymentBatch(models.Model):
                     'batch_type': 'outbound',
                     'payroll_batch_id': batch_id.id,
                 })
-        batch_id.is_batch_paid = True
+            batch_id.is_batch_paid = True
 
 #                 batch_payment.validate_batch_button()
 
