@@ -94,7 +94,7 @@ class RegisterPaymentBatch(models.Model):
                     'batch_type': 'outbound',
                     'payroll_batch_id': batch_id.id
                 }
-                batch_payment = batc_id.env['account.batch.payment'].create(batch_values)
+                batch_payment = batch_id.env['account.batch.payment'].create(batch_values)
                 batch_payment.action_post
 
 
