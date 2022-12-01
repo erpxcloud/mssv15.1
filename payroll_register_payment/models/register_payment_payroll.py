@@ -93,7 +93,7 @@ class RegisterPaymentBatch(models.Model):
                 payments.append(payment)
                 batch_payment = batch_id.env['account.batch.payment'].create({
                     'journal_id': payment[0].journal_id.id,
-                    'payment_ids': [(4, payment.id, None) for payment in payments],
+                    'payment_ids': [(0, payment.id, None) for payment in payments],
                     'payment_method_id': payment[0].payment_method_id.id,
                     'date': batch_id.date_end,
                     'batch_type': 'outbound',
