@@ -73,7 +73,7 @@ class RegisterPaymentBatch(models.Model):
         for batch_id in self:
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
-                batch_id.is_batch_paid = True
+            batch_id.is_batch_paid = True
             
             
     
