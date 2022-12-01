@@ -75,12 +75,12 @@ class RegisterPaymentPayslips(models.Model):
 class RegisterPaymentBatch(models.Model):
     _inherit = 'hr.payslip.run'
 
-    def _compute_batch_payment(self):
-        payment_batch_obj = self.env['account.batch.payment']
-        self.batch_payment_id = payment_batch_obj.search([('payroll_batch_id', '=', self.id)])
+#     def _compute_batch_payment(self):
+#         payment_batch_obj = self.env['account.batch.payment']
+#         self.batch_payment_id = payment_batch_obj.search([('payroll_batch_id', '=', self.id)])
 
-    batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment',
-                                       compute="_compute_batch_payment")
+#     batch_payment_id = fields.Many2one('account.batch.payment', string='Batch Payment',
+#                                        compute="_compute_batch_payment")
     is_batch_paid = fields.Boolean(string='Paid Payslips')
 
     def batch_register_payment(self):
@@ -98,7 +98,6 @@ class RegisterPaymentBatch(models.Model):
                 'payment_method_id': payment[0].payment_method_id.id,
                 'date': batch_id.date_end,
                 'batch_type': 'outbound',
-                'payroll_batch_id': batch_id.id,
             })
 
 
