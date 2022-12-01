@@ -37,7 +37,7 @@ class RegisterPaymentPayslips(models.Model):
         for slip in self:
             pay_amount_new = 0.0
             for line in slip.line_ids:
-                if line.salary_rule_id.code == 'NET':
+                if line.code == 'NET':
                     pay_amount_new+=line.total
             slip.pay_amount = pay_amount_new
     
