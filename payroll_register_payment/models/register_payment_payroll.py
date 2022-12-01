@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
-    payroll_slip_id = fields.Many2one('hr.payslip')
+    payroll_slip_id = fields.Many2one('hr.payslip', string='Payslip Payment')
     visible_payroll_slip_id = fields.Boolean(string='Visibility', compute='compute_visibility', store='True')
 
     def compute_visibility(self):
