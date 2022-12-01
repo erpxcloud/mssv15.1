@@ -92,7 +92,7 @@ class RegisterPaymentBatch(models.Model):
                     'payment_method_id': payment[0].payment_method_id.id,
                     'date': batch_id.date_end,
                     'batch_type': 'outbound',
-                    'payroll_batch_id': batch_id.id,
+#                     'payroll_batch_id': batch_id.id,
                 })
 #                 batch_payment = batch_id.env['account.batch.payment'].create(batch_values)
 #                 batch_payment.action_post
