@@ -49,7 +49,7 @@ class RegisterPaymentPayslips(models.Model):
                 'partner_id': self.employee_id.address_home_id.id,
                 #                 'journal_id': self.journal_id.id,
                 #                 'payment_method_id': self.payment_method_id.id,
-#                 'company_id': self.company_id.id,
+                #                 'company_id': self.company_id.id,
                 'amount': value_amount,
                 'currency_id': self.currency_id.id,
                 'date': self.date_to,
@@ -68,7 +68,8 @@ class RegisterPaymentPayslips(models.Model):
     is_paid = fields.Boolean('Paid Payment ', states={'draft': [('readonly', False)]}, compute="_compute_paid_state")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.user.company_id.currency_id)
-    pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id', readonly=False)
+    pay_amount = fields.Float('Payed amount', compute='_compute_pay_amount', currency_field='currency_id',
+                              readonly=False)
     payment_id = fields.Many2one('account.payment', 'Payment', compute="_compute_payment")
 
 
@@ -83,13 +84,13 @@ class RegisterPaymentBatch(models.Model):
                                        compute="_compute_batch_payment")
     is_batch_paid = fields.Boolean(string='Paid Payslips')
 
-#     def batch_payslip_register_payment(self):
-#         _logger.info(f'\n\n\n  START \n\n\n.')
-#         for batch_id in self:
-#             for payslip in batch_id.slip_ids:
-#                 payslip.register_payment()
-#             batch_id.is_batch_paid = True
-    
+    #     def batch_payslip_register_payment(self):
+    #         _logger.info(f'\n\n\n  START \n\n\n.')
+    #         for batch_id in self:
+    #             for payslip in batch_id.slip_ids:
+    #                 payslip.register_payment()
+    #             batch_id.is_batch_paid = True
+
     def batch_register_payment(self):
         _logger.info(f'\n\n\n  START \n\n\n.')
         for batch_id in self:
@@ -108,9 +109,9 @@ class RegisterPaymentBatch(models.Model):
                     'date': batch_id.date_end,
                     'batch_type': 'outbound',
                     'payroll_batch_id': batch_id.id,
-                })        
-         batch_id.is_batch_paid = True
-               
+                })
+            batch_id.is_batch_paid = True
+
 
 #                 batch_payment.validate_batch_button()
 
