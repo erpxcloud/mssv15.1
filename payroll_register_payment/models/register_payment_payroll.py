@@ -97,7 +97,7 @@ class RegisterPaymentBatch(models.Model):
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
                 _logger.info(f'\n\n\n  Payment Payslip {payment_payslip} \n\n\n.')
-                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payment_payslip.id)])
+                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)])
                 _logger.info(f'\n\n\n  Payment  {payment} \n\n\n.')
                 payments.append(payment)
                 _logger.info(f'\n\n\n  Paymentssssssssssss {payments} \n\n\n.')
