@@ -89,19 +89,8 @@ class RegisterPaymentBatch(models.Model):
             payments = []
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
-                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)])
-                payments.append(payment)
-                batch_payment = batch_id.env['account.batch.payment'].create({
-                    'journal_id': payment[0].journal_id.id,
-                    'payment_ids': [(0, payment.id, None) for payment in payments],
-                    'payment_method_id': payment[0].payment_method_id.id,
-                    'date': batch_id.date_end,
-                    'batch_type': 'outbound',
-                    'payroll_batch_id': batch_id.id,
-                })
             batch_id.is_batch_paid = True
-
-#                 batch_payment.validate_batch_button()
+                
 
 
 class HrContract(models.Model):
