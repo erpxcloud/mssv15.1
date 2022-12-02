@@ -98,13 +98,22 @@ class RegisterPaymentBatch(models.Model):
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
                 _logger.info(f'\n\n\n  Payment Payslip {payment_payslip} \n\n\n.')
-                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)])
+                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payslip.id)], limit=1)
                 _logger.info(f'\n\n\n  Payment  {payment} \n\n\n.')
                 payments.append(payment)
                 _logger.info(f'\n\n\n  Paymentssssssssssss {payments} \n\n\n.')
+                for payment in payments:
+                    if payment.amount != 0.00:
+                        batch_lines = {
+                            'name': payment.name,
+                            'ref': payment.ref,
+                            'partner_id': payment.partner_id.id,
+                            'date': payment.date,
+                            'amount_signed': - payment.amount,
+                        }
+                        _logger.info(f'\n\n\n  Batch Payment linessssssssssss {batch_lines} \n\n\n.')
                 batch_payment = batch_id.env['account.batch.payment'].create({
                     'journal_id': payment[0].journal_id.id,
-                    'payment_ids': [(0, payment.id, None) for payment in payments if payment.amount != 0.00],
                     'payment_method_id': payment[0].payment_method_id.id,
                     'date': batch_id.date_end,
                     'batch_type': 'outbound',
