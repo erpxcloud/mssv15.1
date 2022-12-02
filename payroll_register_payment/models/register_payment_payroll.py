@@ -83,14 +83,35 @@ class RegisterPaymentBatch(models.Model):
                                        compute="_compute_batch_payment")
     is_batch_paid = fields.Boolean(string='Paid Payslips')
 
+#     def batch_payslip_register_payment(self):
+#         _logger.info(f'\n\n\n  START \n\n\n.')
+#         for batch_id in self:
+#             for payslip in batch_id.slip_ids:
+#                 payslip.register_payment()
+#             batch_id.is_batch_paid = True
+    
     def batch_register_payment(self):
         _logger.info(f'\n\n\n  START \n\n\n.')
         for batch_id in self:
             payments = []
             for payslip in batch_id.slip_ids:
                 payment_payslip = payslip.register_payment()
-            batch_id.is_batch_paid = True
-                
+                _logger.info(f'\n\n\n  Payment Payslip {payment_payslip} \n\n\n.')
+                payment = batch_id.env['account.payment'].search([('payroll_slip_id', '=', payment_payslip.id)])
+                _logger.info(f'\n\n\n  Payment  {payment} \n\n\n.')
+                payments.append(payment)
+                _logger.info(f'\n\n\n  Paymentssssssssssss {payments} \n\n\n.')
+#              batch_payment = batch_id.env['account.batch.payment'].create({
+#                     'journal_id': payment[0].journal_id.id,
+#                     'payment_ids': [(0, payment.id, None) for payment in payments],
+#                     'payment_method_id': payment[0].payment_method_id.id,
+#                     'date': batch_id.date_end,
+#                     'batch_type': 'outbound',
+#                     'payroll_batch_id': batch_id.id,
+#                 })   
+             batch_id.is_batch_paid = True
+
+#                 batch_payment.validate_batch_button()
 
 
 class HrContract(models.Model):
