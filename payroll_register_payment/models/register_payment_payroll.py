@@ -101,16 +101,16 @@ class RegisterPaymentBatch(models.Model):
                 _logger.info(f'\n\n\n  Payment  {payment} \n\n\n.')
                 payments.append(payment)
                 _logger.info(f'\n\n\n  Paymentssssssssssss {payments} \n\n\n.')
-#              batch_id.is_batch_paid = True
-#              batch_payment = batch_id.env['account.batch.payment'].create({
-#                     'journal_id': payment[0].journal_id.id,
-#                     'payment_ids': [(0, payment.id, None) for payment in payments],
-#                     'payment_method_id': payment[0].payment_method_id.id,
-#                     'date': batch_id.date_end,
-#                     'batch_type': 'outbound',
-#                     'payroll_batch_id': batch_id.id,
-#                 })   
-             
+                batch_payment = batch_id.env['account.batch.payment'].create({
+                    'journal_id': payment[0].journal_id.id,
+                    'payment_ids': [(0, payment.id, None) for payment in payments if payment.amount != 0.00],
+                    'payment_method_id': payment[0].payment_method_id.id,
+                    'date': batch_id.date_end,
+                    'batch_type': 'outbound',
+                    'payroll_batch_id': batch_id.id,
+                })        
+         batch_id.is_batch_paid = True
+               
 
 #                 batch_payment.validate_batch_button()
 
