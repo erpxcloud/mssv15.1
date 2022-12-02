@@ -27,7 +27,7 @@ class RegisterPaymentPayslips(models.Model):
     #     def _compute_pay_amount(self):
     #         for rec in self:
     #             for line in rec.line_ids:
-    #                 payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)])
+    #                 payoff = line.search([('code', 'in', ('NET', 'LIQ')), ('slip_id', '=', self.id)], limit=1)
     #             rec.pay_amount = payoff.amount
 
     @api.depends('line_ids')
