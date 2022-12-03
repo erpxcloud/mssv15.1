@@ -120,7 +120,7 @@ class RegisterPaymentBatch(models.Model):
                     'amount_signed': - payment.amount,
                     'batch_payment_id': batch_payment.id
                  })
-                
+                _logger.info(f'\n\n\n  Batch Payment-----------------{payment.id, payment.name, payment.ref, payment.partner_id.id, payment.date, payment.amount} \n\n\n.')
                 btc_paym.amount_signed = - payment.amount
             batch_id.is_batch_paid = True
 
