@@ -117,6 +117,7 @@ class RegisterPaymentBatch(models.Model):
                     'partner_id': payment.partner_id.id,
                     'date': payment.date,
                     'amount_signed': - payment.amount,
+                    'payroll_batch_id': batch_payment.id
                  })
             batch_id.is_batch_paid = True
 
