@@ -111,14 +111,13 @@ class RegisterPaymentBatch(models.Model):
                     })
             _logger.info(f'\n\n\n  Batch Payment************ {batch_payment.id} \n\n\n.')
             for payment in payments:
-                if payment.amount != 0.00:
-                    batch_payment.payment_ids.create({
-                        'name': payment.name,
-                        'ref': payment.ref,
-                        'partner_id': payment.partner_id.id,
-                        'date': payment.date,
-                        'amount_signed': - payment.amount,
-                    })
+                batch_payment.payment_ids.create({
+                    'name': payment.name,
+                    'ref': payment.ref,
+                    'partner_id': payment.partner_id.id,
+                    'date': payment.date,
+                    'amount_signed': - payment.amount,
+                 })
             batch_id.is_batch_paid = True
 
 
