@@ -111,6 +111,7 @@ class RegisterPaymentBatch(models.Model):
                     })
             _logger.info(f'\n\n\n  Batch Payment************ {batch_payment.id} \n\n\n.')
             for payment in payments:
+                _logger.info(f'\n\n\n  Batch Payment************ {payment.id, payment.name, payment.ref, payment.partner_id.id, payment.date, payment. amount} \n\n\n.')
                 batch_payment.payment_ids.create({
                     'name': payment.name,
                     'ref': payment.ref,
