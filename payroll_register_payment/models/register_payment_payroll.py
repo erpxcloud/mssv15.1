@@ -107,24 +107,25 @@ class RegisterPaymentBatch(models.Model):
                         'payment_method_id': payment[0].payment_method_id.id,
                         'date': batch_id.date_end,
                         'batch_type': 'outbound',
+                        'payment_ids': [(4, payment.id, None) for payment in payments if payment.amount != 0],
                         'payroll_batch_id': batch_id.id,
                     })
             _logger.info(f'\n\n\n  Batch Payment************ {batch_payment.id} \n\n\n.')
-            for payment in payments:
-                _logger.info(f'\n\n\n  Batch Payment************ {payment.id, payment.name, payment.ref, payment.partner_id.id, payment.date, payment.amount} \n\n\n.')
-                btc_paym = batch_payment.payment_ids.create({
-                    'name': payment.name,
-                    'ref': payment.ref,
-                    'partner_id': payment.partner_id.id,
-                    'date': payment.date,
-                    'amount_signed': - payment.amount,
-                    'batch_payment_id': batch_payment.id
-                 })
-                _logger.info(f'\n\n\n  Batch Payment-----------------{payment.id, payment.name, payment.ref, payment.partner_id.id, payment.date, payment.amount} \n\n\n.')
-                btc_paym.update({
-                    'amount_signed': - payment.amount,
-                })
-                _logger.info(f'\n\n\n  Batch Payment+++++++++++++ {btc_paym.amount_signed} \n\n\n.')
+#             for payment in payments:
+#                 _logger.info(f'\n\n\n  Batch Payment************ {payment.id, payment.name, payment.ref, payment.partner_id.id, payment.date, payment.amount} \n\n\n.')
+#                 btc_paym = batch_payment.payment_ids.create({
+#                     'name': payment.name,
+#                     'ref': payment.ref,
+#                     'partner_id': payment.partner_id.id,
+#                     'date': payment.date,
+#                     'amount_signed': - payment.amount,
+#                     'batch_payment_id': batch_payment.id
+#                  })
+#                 _logger.info(f'\n\n\n  Batch Payment-----------------{payment.id, payment.name, payment.ref, payment.partner_id.id, payment.date, payment.amount} \n\n\n.')
+#                 btc_paym.update({
+#                     'amount_signed': - payment.amount,
+#                 })
+#                 _logger.info(f'\n\n\n  Batch Payment+++++++++++++ {btc_paym.amount_signed} \n\n\n.')
             batch_id.is_batch_paid = True
 
 
