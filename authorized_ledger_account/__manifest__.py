@@ -26,7 +26,7 @@
 
     'data': [
         'views/view_account_account.xml',
-        'views/report_journal.xml',
+#         'views/report_journal.xml',
         'views/search_template_view.xml',
         'views/account_analytic_group.xml',
         'security/security.xml',
