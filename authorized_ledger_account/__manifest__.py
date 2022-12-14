@@ -24,6 +24,7 @@
 
     'depends': ['base', 'account', 'account_reports'],
 
+    
     'data': [
         'views/view_account_account.xml',
 #         'views/report_journal.xml',
