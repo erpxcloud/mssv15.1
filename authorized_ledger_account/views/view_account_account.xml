@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="account.view_account_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//form/sheet/group" position="after">
+                    <xpath expr="//notebook" position="after">
                         <notebook>
                             <page id="non_auth_user_tab" string="Non Authorized Users">
                                 <field name="non_auth_user_ids" mode="tree" context="{'default_account_id': active_id}">
