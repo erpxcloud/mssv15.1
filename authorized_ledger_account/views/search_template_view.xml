@@ -1,7 +1,7 @@
 <odoo>
 	<data>
 		<template id="inherit_search_template_journals" inherit_id="account_reports.search_template_journals">
-            <xpath expr="//div[@class='dropdown-menu o_filters_menu']" position="replace">
+<!--             <xpath expr="//div[@class='dropdown-menu o_filters_menu']" position="replace"> -->
 	       		<div class="dropdown-menu o_filters_menu" role="menu">
 		            <t t-foreach="options['journals']" t-as="j">
 		                <t t-if="j.get('id') == 'divider'">
