@@ -1,6 +1,6 @@
 <odoo>
 	<data>
-<!-- 		<record id="azk_accounting_payment_currency_view_account_payment_form_inherit" model="ir.ui.view">
+		<record id="azk_accounting_payment_currency_view_account_payment_form_inherit" model="ir.ui.view">
 			<field name="name">azk_accounting_payment_currency_view.account.payment.form_inherit</field>
 			<field name="model">account.payment</field>
 			<field name="inherit_id" ref="account.view_account_payment_form" />
@@ -21,6 +21,6 @@
 							attrs="{'readonly':[('state', '!=', 'draft')]}"/>
 				</xpath>
 			</field>
-		</record> -->
+		</record>
 	</data>
 </odoo>
