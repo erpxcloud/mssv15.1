@@ -17,7 +17,7 @@
 		</record>
         
         
-        <record id="wizard_register_payment_form" model="ir.ui.view">
+<!--         <record id="wizard_register_payment_form" model="ir.ui.view">
 			<field name="name">azk_accounting_payment_currency_wizard.account.payment.invoice.form_inherit</field>
 			<field name="model">hr.expense.sheet.register.payment.wizard</field>
 			<field name="inherit_id" ref="hr_expense.hr_expense_sheet_register_payment_view_form" />
@@ -48,6 +48,6 @@
 					
 				</xpath>
 			</field>
-		</record>
+		</record> -->
 	</data>
 </odoo>
