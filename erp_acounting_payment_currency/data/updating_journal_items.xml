@@ -1,3 +1,3 @@
 <odoo>
-    <function name="update_dex_lines" model="account.move.line" />
+<!--     <function name="update_dex_lines" model="account.move.line" /> -->
 </odoo>
