@@ -1,8 +1,8 @@
 <odoo>
 	<data>
 		<template id="inherit_search_template_journals" inherit_id="account_reports.search_template_journals">
-<!-- 	       			<div class="dropdown-menu o_filters_menu" role="menu"> -->
-					<xpath expr="//div[@class='dropdown-menu o_filters_menu']" position="replace">
+			<xpath expr="//div[@class='dropdown-menu o_filters_menu']" position="replace">
+	       			<div class="dropdown-menu o_filters_menu" role="menu">
 		            		<t t-foreach="options['journals']" t-as="j">
 		                		<t t-if="j.get('id') == 'divider'">
 						    <div role="separator" class="dropdown-divider"/>
@@ -43,8 +43,9 @@
 					    </t>
 					</t>
 				    </t>
-			</xpath>
-<!-- 		        </div> -->
+			
+		        </div>
+				</xpath>
             		
         </template>
 	</data>
