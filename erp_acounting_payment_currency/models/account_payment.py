@@ -205,7 +205,7 @@ class AccountMoveLine(models.Model):
                 aml.is_dex_line = True
                 
 class ExpenseSheet(models.TransientModel):
-    _inherit = "account.payment.register.form"
+    _inherit = "account.payment.register"
     
     account_amount_currency_id = fields.Many2one('res.currency', string='Account Amount Currency', required=True, default=lambda self: self.env.company.currency_id)
     account_amount_values = fields.Float(string="Account Amount Value")
