@@ -44,7 +44,7 @@
 		                </t>
 		            </t>
 		        </div>
-            </xpath>
+<!--             </xpath> -->
         </template>
 	</data>
 </odoo>
