@@ -7,10 +7,12 @@
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='amount']" position="after">
 					<field name="account_amount" required="1"/>
-					<div name="account_amount_div" class="o_row">
-						<field name="account_currency_id" readonly="1"/>
-					</div>
-                   			<field name="company_currency_id" invisible="1"/>
+					<field name="account_currency_id" readonly="1"/>
+					<field name="company_currency_id" invisible="1"/>
+<!-- 					<div name="account_amount_div" class="o_row">
+						
+					</div> -->
+                   			
 				</xpath>
 			</field>
 		</record>
