@@ -204,8 +204,8 @@ class AccountMoveLine(models.Model):
             for aml in self.env["account.move.line"].search([("company_id","=",company.id),("account_id","in",account_ids),("move_id.state","=","posted")]):
                 aml.is_dex_line = True
                 
-class ExpenseSheet(models.TransientModel):
-    _inherit = "hr.expense.sheet.register.payment.wizard"
+class ExpenseSheet(models.Model):
+    _inherit = "hr.expense.sheet"
     
     account_amount_currency_id = fields.Many2one('res.currency', string='Account Amount Currency', required=True, default=lambda self: self.env.company.currency_id)
     account_amount_values = fields.Float(string="Account Amount Value")
