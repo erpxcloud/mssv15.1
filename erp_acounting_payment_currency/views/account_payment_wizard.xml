@@ -6,10 +6,10 @@
 			<field name="inherit_id" ref="account.view_account_payment_register_form" />
 			<field name="arch" type="xml">
 				<xpath expr="//label[@for='amount']" position="before">
-<!-- 					<label for="account_amount"/> -->
+					<label for="account_amount"/>
 					<div name="account_amount_div" class="o_row">
-<!--                        	<field name="account_currency_id" readonly="1"/> -->
-<!-- 						<field name="account_amount" required="1"/> -->
+                       	<field name="account_currency_id" readonly="1"/>
+						<field name="account_amount" required="1"/>
 					</div>
                    	<field name="company_currency_id" invisible="1"/>
 				</xpath>
