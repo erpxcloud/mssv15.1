@@ -6,7 +6,7 @@
     'version': '13.0.0.0.4',
     'category': '',
 
-    'depends': ['account_accountant', 'account_batch_payment','hr','base'],
+    'depends': ['account_accountant', 'account_batch_payment','hr','base','account'],
 
     'data': [
         'views/account_payment.xml',
