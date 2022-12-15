@@ -30,24 +30,20 @@
 			</field>
 		</record>
         
-<!--        <record id="hr_ecp_form_view" model="ir.ui.view">
+       		<record id="hr_ecp_form_view" model="ir.ui.view">
 			<field name="name">hr.exp</field>
 			<field name="model">hr.expense.sheet</field>
 			<field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form" />
 			<field name="arch" type="xml">
-                
-                <xpath expr="//button[@name='%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d']" position="replace">
-                    <button name="%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d" type="action" string="Register Payment" class="oe_highlight o_expense_sheet_pay" attrs="{'invisible': [('state', '!=', 'post')]}" context="{'default_amount': total_amount, 'partner_id': address_id, 'default_account_amount_values':account_amount_value,
-                   'default_account_amount_currency_id' : account_currency}" groups="account.group_account_manager"/>
-                </xpath>
+			<xpath expr="//button[@name='%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d']" position="replace">
+			    <button name="%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d" type="action" string="Register Payment" class="oe_highlight o_expense_sheet_pay" attrs="{'invisible': [('state', '!=', 'post')]}" context="{'default_amount': total_amount, 'partner_id': address_id, 'default_account_amount_values':account_amount_value,
+			   'default_account_amount_currency_id' : account_currency}" groups="account.group_account_manager"/>
+			</xpath>
 				<xpath expr="//group[@name='expense_total']" position="inside">
-          
-                    <field name="account_amount_value"/>
-                    <field name="account_currency" invisible="1"/>
-                  
-					
+					<field name="account_amount_value"/>
+					<field name="account_currency" invisible="1"/>	
 				</xpath>
 			</field>
-		</record> -->
+		</record>
 	</data>
 </odoo>
