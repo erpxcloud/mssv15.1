@@ -2,8 +2,8 @@
 	<data>
 		<record id="azk_accounting_payment_currency_wizard_account_payment_invoice_form_inherit" model="ir.ui.view">
 			<field name="name">azk_accounting_payment_currency_wizard.account.payment.invoice.form_inherit</field>
-			<field name="model">account.payment</field>
-			<field name="inherit_id" ref="account.view_account_payment_invoice_form" />
+			<field name="model">account.payment.register</field>
+			<field name="inherit_id" ref="account.view_account_payment_register_form" />
 			<field name="arch" type="xml">
 				<xpath expr="//label[@for='amount']" position="before">
 					<label for="account_amount"/>
