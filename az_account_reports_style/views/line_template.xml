@@ -8,11 +8,11 @@
 				 <attribute name="class">''</attribute>
 			</xpath>
 		  
-		  	<xpath expr="//t[@t-as='line']/tr[1]//t[@t-as='column']//td" position="attributes">
+		  	<xpath expr="//t[@t-as='line']/tr[1]//t[@t-as='cell']//td" position="attributes">
 		  		<attribute name="t-att-style">column.get('style', lines.get('columns_header')[-1][column_index+line.get('colspan', 1)].get('style', '')) + ' ;   vertical-align: top; white-space: normal;  padding: 0px; overflow-wrap: break-word !important;'</attribute>
 		  	</xpath>
 		   
-		     <xpath expr="//t[@t-as='line']/tr[1]//t[@t-as='column']//td" position="inside">
+		     <xpath expr="//t[@t-as='line']/tr[1]//t[@t-as='cell']//td" position="inside">
 			     <t t-if="context.get('print_mode') == True and model and model._name == 'account.financial.html.report'">
 				     <style>
 					     .number{
