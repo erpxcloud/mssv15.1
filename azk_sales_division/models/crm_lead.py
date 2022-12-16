@@ -19,26 +19,26 @@ class CrmLead(models.Model):
         
         return action
     
-    @api.onchange('division_id')
-    def division_change(self): 
-        #Get the original defined domain in order to preserve original function 
-        salesperson_domain = self.env['crm.lead'].fields_get(['user_id'], ['domain']).get('user_id',{}).get('domain', [])
+#     @api.onchange('division_id')
+#     def division_change(self): 
+#         #Get the original defined domain in order to preserve original function 
+#         salesperson_domain = self.env['crm.lead'].fields_get(['user_id'], ['domain']).get('user_id',{}).get('domain', [])
         
-        if self.division_id:
-            #check if there is a domain previously defined and append to it
-            if salesperson_domain:
-                salesperson_domain.insert(0, '&')
-                salesperson_domain.append(('id', 'in', self.division_id.salesperson_ids.mapped('id')))
-            else:
-                salesperson_domain = [('id', 'in', self.division_id.salesperson_ids.mapped('id'))]
+#         if self.division_id:
+#             #check if there is a domain previously defined and append to it
+#             if salesperson_domain:
+#                 salesperson_domain.insert(0, '&')
+#                 salesperson_domain.append(('id', 'in', self.division_id.salesperson_ids.mapped('id')))
+#             else:
+#                 salesperson_domain = [('id', 'in', self.division_id.salesperson_ids.mapped('id'))]
         
-        rt_value = {
-             'domain': {
-                 'user_id': salesperson_domain
-                 }
-            }
-        if self.user_id and not self.user_id in self.env['res.users'].search(salesperson_domain):
-            self.user_id = False
+#         rt_value = {
+#              'domain': {
+#                  'user_id': salesperson_domain
+#                  }
+#             }
+#         if self.user_id and not self.user_id in self.env['res.users'].search(salesperson_domain):
+#             self.user_id = False
 
-        log.debug("Called on change: %s and returned: %s", self, rt_value)
-        return rt_value
+#         log.debug("Called on change: %s and returned: %s", self, rt_value)
+#         return rt_value
