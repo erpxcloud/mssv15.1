@@ -22,10 +22,11 @@ class CrmLead(models.Model):
     @api.onchange('division_id')
     def division_change(self): 
         #Get the original defined domain in order to preserve original function 
-        salesperson_domain = self.env['crm.lead'].fields_get(['user_id'], ['domain']).get('user_id',{}).get('domain', [])
+        salesperson_domain = list(self.env['crm.lead'].fields_get(['user_id'], ['domain']).get('user_id',{}).get('domain', []))
         log.info(f'\n\n\n{salesperson_domain}\n\n\n\n.')
         if self.division_id:
             #check if there is a domain previously defined and append to it
+            
             if salesperson_domain:
                 salesperson_domain.insert(0, '&')
                 salesperson_domain.append(('id', 'in', self.division_id.salesperson_ids.mapped('id')))
