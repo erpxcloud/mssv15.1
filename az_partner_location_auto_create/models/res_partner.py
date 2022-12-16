@@ -2,6 +2,7 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 import logging 
 log = logging.getLogger(__name__)
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
