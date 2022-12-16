@@ -13,38 +13,38 @@ class SaleOrder(models.Model):
         res["division_id"] = self.division_id
         return res
     
-    @api.onchange('division_id')
-    def division_change(self): 
-        #Get the original defined domain in order to preserve original function
+#     @api.onchange('division_id')
+#     def division_change(self): 
+#         #Get the original defined domain in order to preserve original function
 
-        salesperson_domain = self.env['sale.order'].fields_get(['user_id'], ['domain']).get('user_id',{}).get('domain', [])
+#         salesperson_domain = self.env['sale.order'].fields_get(['user_id'], ['domain']).get('user_id',{}).get('domain', [])
         
-        if self.division_id:
-            #check if there is a domain previously defined and append to it
-            if salesperson_domain:
-                salesperson_domain = list(salesperson_domain)
-                salesperson_domain.insert(0, '&')
-                salesperson_domain.append(('id', 'in', self.division_id.salesperson_ids.mapped('id')))
-            else:
-                salesperson_domain = [('id', 'in', self.division_id.salesperson_ids.mapped('id'))]
+#         if self.division_id:
+#             #check if there is a domain previously defined and append to it
+#             if salesperson_domain:
+#                 salesperson_domain = list(salesperson_domain)
+#                 salesperson_domain.insert(0, '&')
+#                 salesperson_domain.append(('id', 'in', self.division_id.salesperson_ids.mapped('id')))
+#             else:
+#                 salesperson_domain = [('id', 'in', self.division_id.salesperson_ids.mapped('id'))]
             
-        rt_value = {
-             'domain': {
-                 'user_id': salesperson_domain
-                 }
-            }
+#         rt_value = {
+#              'domain': {
+#                  'user_id': salesperson_domain
+#                  }
+#             }
       
-        if self.user_id and not self.user_id in self.env['res.users'].search(salesperson_domain):
-            self.user_id = False
+#         if self.user_id and not self.user_id in self.env['res.users'].search(salesperson_domain):
+#             self.user_id = False
             
-        log.debug("Called on change: %s and returned: %s", self, rt_value)
-        return rt_value
+#         log.debug("Called on change: %s and returned: %s", self, rt_value)
+#         return rt_value
     
-    @api.onchange('partner_id')
-    def onchange_partner_id(self):
-        result = super(SaleOrder,self).onchange_partner_id()
-        self.division_change()
-        log.debug("Called onchange_partner_id: %s", self)
+#     @api.onchange('partner_id')
+#     def onchange_partner_id(self):
+#         result = super(SaleOrder,self).onchange_partner_id()
+#         self.division_change()
+#         log.debug("Called onchange_partner_id: %s", self)
         
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
