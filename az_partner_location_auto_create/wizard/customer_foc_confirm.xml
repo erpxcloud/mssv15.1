@@ -9,7 +9,7 @@
                 <span> This Customer has This product in his FOC location.</span>
                 <span> Are you sure you want to confirm?</span>
                 <footer>
-		    	<button string="Confirm" name="set_foc_state" type="object" class="oe_highlight"/>
+		    <button string="Confirm" name="set_foc_state" type="object" class="oe_highlight"/>
 		    	   or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
