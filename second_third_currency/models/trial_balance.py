@@ -63,7 +63,7 @@ class ReportAccountCoa(models.AbstractModel):
             
             
             
-            cids = request.httprequest.cookies.get('cids', str(request.env.user.company_id.id))
+            cids = request.httprequest.cookies.get('cids', str(request.env.company.id))
 
 
             
