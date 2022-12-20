@@ -30,7 +30,7 @@ class ReportAccountCoa(models.AbstractModel):
             company = self.env['res.company'].search([('id', '=', self.env.company.id)])
             second = self.env['res.currency'].search([('id', '=', company.second_currency.id)])
             third = self.env['res.currency'].search([('id', '=', company.third_currency.id)])
-            currencies = self.env['res.currency'].search([('id','in', [second.id, third.id,self.env.company.currency_id.id])])
+            currencies = self.env['res.currency'].search([('id','in', [second.id, third.id,self.env.company.currency_id])])
             _logger.debug("currencies")
             res['currenciess'] = [{'id': c.id, 'name': c.name, 'selected': False} for c in currencies]
             if 'curr' in self._context:
@@ -39,7 +39,7 @@ class ReportAccountCoa(models.AbstractModel):
                         c['selected'] = True
             else:
                 for c in res['currenciess']:
-                    if c['id'] == self.env.user.company_id.currency_id.id:
+                    if c['id'] == self.env.company.currency_id:
                         c['selected'] = True
             res['currencys'] = True
         return res
@@ -80,11 +80,11 @@ class ReportAccountCoa(models.AbstractModel):
                     # Append the debit/credit columns.
                     debit = account_sum.get('second_debit_id', 0.0) - account_init_bal.get('second_debit_id', 0.0)
                     credit = account_sum.get('second_credit_id', 0.0) - account_init_bal.get('second_credit_id', 0.0)
-#                     debit = self.env.user.company_id.currency_id._compute(self.env.user.company_id.currency_id,cur,debit)
-#                     credit = self.env.user.company_id.currency_id._compute(self.env.user.company_id.currency_id,cur,credit)
+#                     debit = self.env.company.currency_id._compute(self.env.company.currency_id,cur,debit)
+#                     credit = self.env.company.currency_id._compute(self.env.company.currency_id,cur,credit)
                     sums += [
                         debit,
-                        credit,
+                        credit,self.env.company
                     ]
                     account_balance += sums[-2] - sums[-1]
 
