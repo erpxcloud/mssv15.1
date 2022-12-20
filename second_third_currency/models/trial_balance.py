@@ -301,7 +301,7 @@ class ReportAccountCoa(models.AbstractModel):
     
     def get_xlsx(self, options, response=None):
         for opt in options['currenciess']:
-            if opt['selected'] and self.env['res.currency'].browse(opt['id']) != self.env.user.company_id.currency_id:
+            if opt['selected'] and self.env['res.currency'].browse(opt['id']) != self.env.company.currency_id:
                 return super(ReportAccountCoa, self.with_context(curr = opt['id'])).get_xlsx(options,response)
         return super(ReportAccountCoa, self).get_xlsx(options,response)
 
