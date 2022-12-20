@@ -49,12 +49,25 @@ class ReportAccountCoa(models.AbstractModel):
         company = self.env['res.company'].search([('id', '=', self.env.company.id)])
         second = self.env['res.currency'].search([('id', '=', company.second_currency.id)])
         third = self.env['res.currency'].search([('id', '=', company.third_currency.id)])
+
+                
+        company_currency = company.currency_id
+        
+        
         if self._context.get('curr') == second.id:
             cur = self.env['res.currency'].browse(self._context.get('curr'))
             new_options = options.copy()
             new_options['unfold_all'] = True
             options_list = self._get_options_periods_list(new_options)
             accounts_results, taxes_results = self.env['account.general.ledger']._do_query(options_list, fetch_lines=False)
+            
+            
+            
+            cids = request.httprequest.cookies.get('cids', str(request.env.user.company_id.id))
+
+
+            
+            
             company_currency = self.env.company.currency_id
             lines = []
             totals = [0.0] * (2 * (len(options_list) + 2))
