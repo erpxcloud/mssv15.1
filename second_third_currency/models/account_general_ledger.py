@@ -41,7 +41,7 @@ class GeneralLedgerReport(models.AbstractModel):
                         c['selected'] = True
             else:
                 for c in res['currenciess']:
-                    if c['id'] == self.env.user.company_id.currency_id.id:
+                    if c['id'] == self.env.company.currency_id.id:
                         c['selected'] = True
             res['currencys'] = True
         return res
