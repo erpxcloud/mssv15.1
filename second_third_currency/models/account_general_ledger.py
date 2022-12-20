@@ -4,7 +4,10 @@
 from odoo import models, fields, api, _
 from odoo.tools.misc import format_date, DEFAULT_SERVER_DATE_FORMAT
 from datetime import timedelta
+import logging
+import warnings
 
+_logger = logging.getLogger(__name__)
 
 class GeneralLedgerReport(models.AbstractModel):
     _name = "account.general.ledger"
