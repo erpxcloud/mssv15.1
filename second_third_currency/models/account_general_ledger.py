@@ -26,8 +26,12 @@ class GeneralLedgerReport(models.AbstractModel):
             company = self.env['res.company'].search([('id', '=', self.env.company.id)])
             second = self.env['res.currency'].search([('id', '=', company.second_currency.id)])
             third = self.env['res.currency'].search([('id', '=', company.third_currency.id)])
-            currencies = self.env['res.currency'].search([('id','in', [second.id, third.id,self.env.company.currency_id.id])])
+            currencies) = self.env['res.currency'].search([('id','in', [second.id, third.id,self.env.company.currency_id.id])])
+            _logger.debug("1",currencies)
             res['currenciess'] = [{'id': c.id, 'name': c.name, 'selected': False} for c in currencies]
+            _logger.debug("2",self._context)
+            _logger.debug("3",self.env.user.company_id.currency_id.id)
+            _logger.debug("4",self.env.company.currency_id.id)
             if 'curr' in self._context:
                 for c in res['currenciess']:
                     if c['id'] == self._context.get('curr'):
