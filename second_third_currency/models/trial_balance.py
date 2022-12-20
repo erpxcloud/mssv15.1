@@ -30,7 +30,7 @@ class ReportAccountCoa(models.AbstractModel):
             company = self.env['res.company'].search([('id', '=', self.env.company.id)])
             second = self.env['res.currency'].search([('id', '=', company.second_currency.id)])
             third = self.env['res.currency'].search([('id', '=', company.third_currency.id)])
-            currencies = self.env['res.currency'].search([('id','in', [second.id, third.id,self.env.company.currency_id])])
+            currencies = self.env['res.currency'].search([('id','in', [second.id, third.id,self.env.company.currency_id.id])])
             _logger.debug("currencies")
             res['currenciess'] = [{'id': c.id, 'name': c.name, 'selected': False} for c in currencies]
             if 'curr' in self._context:
