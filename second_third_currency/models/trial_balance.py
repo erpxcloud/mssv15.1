@@ -62,8 +62,7 @@ class ReportAccountCoa(models.AbstractModel):
             accounts_results, taxes_results = self.env['account.general.ledger']._do_query(options_list, fetch_lines=False)
             
             
-            
-            cids = request.httprequest.cookies.get('cids', str(request.env.company.id))
+ 
 
 
             
