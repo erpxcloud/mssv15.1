@@ -3,7 +3,6 @@
 {
     'name': 'Payroll Payments',
     'author': 'Hibou Corp. <hello@hibou.io>',
-    'version': '13.0.1.1.0',
     'category': 'Human Resources',
     'sequence': 95,
     'summary': 'Register payments for Payroll Payslips',
@@ -46,6 +45,5 @@ Passes original Payroll Accounting tests and additional ones for gouping behavio
         'views/hr_payslip_views.xml',
     ],
     'installable': True,
-    'application': False,
-    'license': 'OPL-1',
+
 }
