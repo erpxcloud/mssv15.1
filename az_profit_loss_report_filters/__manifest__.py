@@ -9,7 +9,7 @@
     'author': "Azkatech",
     'website': "http://www.azka.tech",
     'category': 'Accounting/Reporting',
-    'version': '15,
+    'version': '15.0',
     'depends': ['account_reports', 'mss_end_user', 'azk_sales_division'],
 
     'data': [
