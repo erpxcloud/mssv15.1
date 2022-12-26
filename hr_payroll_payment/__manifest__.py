@@ -12,6 +12,7 @@
     'depends': [
         'hr_payroll_account',
         'account_batch_payment',
+        'hibou_professional',
     ],
     'data': [
         #'wizard/hr_payroll_register_payment_views.xml',
