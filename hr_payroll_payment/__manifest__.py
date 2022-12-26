@@ -5,6 +5,7 @@
     'author': 'Hibou Corp. <hello@hibou.io>',
     'category': 'Human Resources',
     'sequence': 95,
+    'version': '15.0',
     'summary': 'Register payments for Payroll Payslips',
     'description': """
     """,
