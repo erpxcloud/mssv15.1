@@ -5,7 +5,7 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='advanced_settings']/group" position="inside">
+            <xpath expr="//page[@name='advanced_settings']/group/group" position="before">
                 <group name="payroll_payment" string="Payroll Payments">
                     <field name="payroll_entry_type"/>
                     <field name="payroll_payment_journal_id" domain="[('type', 'in', ('bank', 'cash'))]"/>
