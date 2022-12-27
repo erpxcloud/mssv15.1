@@ -344,7 +344,9 @@ class HrPayslip(models.Model):
 
         # The code below is called if there is an error in the balance between credit and debit sum.
         if float_compare(credit_sum, debit_sum, precision_digits=precision) == -1:
+            # Missing
             acc_id = slip.journal_id.default_credit_account_id.id
+            
             if not acc_id:
                 raise UserError(
                     _('The Expense Journal "%s" has not properly configured the Credit Account!') % (
