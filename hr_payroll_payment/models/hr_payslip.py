@@ -30,12 +30,7 @@ class AccountPayment(models.Model):
                     _('You cannot make a batch payment with internal transfers. Internal transfers ids: %s')
                     % ([p.id for p in self if p.payment_type == 'transfer'])
                 )
-            _logger.info(f'\n\n\n  1 {self[0].journal_id.id}\n\n\n.')
-            _logger.info(f'\n\n\n 2  {[(4, payment.id, None) for payment in self]}\n\n\n.')
-            _logger.info(f'\n\n\n 3  {self[0].payment_method_id.id}\n\n\n.')
-            
-            _logger.info(f'\n\n\n  5  {self[0].payment_type}\n\n\n.')
-            _logger.info(f'\n\n\n  amount  {self[0].amount}\n\n\n.')
+
 
             batch = self.env['account.batch.payment'].create({
                 'journal_id': self[0].journal_id.id,
@@ -44,8 +39,6 @@ class AccountPayment(models.Model):
                 'date':self._context.get('payment_date'),
                 'batch_type': self[0].payment_type,
             })
-            _logger.info(f'\n\n\n BATCH {batch}\n\n\n.')
-
             return {
                 "type": "ir.actions.act_window",
                 "res_model": "account.batch.payment",
