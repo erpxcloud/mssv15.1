@@ -42,7 +42,7 @@
         </field>
     </record>
 
-    <record id="hr_payslip_run_form_payment" model="ir.ui.view">
+    <record id="hr_payslip_run_form_payment_1" model="ir.ui.view">
         <field name="name">hr.payslip.run.form.payment</field>
         <field name="model">hr.payslip.run</field>
         <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
@@ -57,6 +57,7 @@
                 <field name="date"/>
                 <field name="batch_payment_id" attrs="{'invisible': [('batch_payment_id', '=', False)]}"/>
             </xpath>
+            
         </field>
     </record>
 
