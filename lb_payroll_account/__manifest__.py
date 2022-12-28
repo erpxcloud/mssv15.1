@@ -2,7 +2,10 @@
 {
     'name': 'Lebanese Payroll With Accounting',
     'category': 'Accounting',
-    'depends': ['lb_hr_payroll', 'hr_payroll_account'],
+    'depends': ['base',
+#                 'lb_hr_payroll',
+#                 'hr_payroll_account'
+               ],
     'description': """
 Lebanese Payroll With Accounting.
     """,
