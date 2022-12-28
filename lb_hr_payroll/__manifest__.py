@@ -18,7 +18,7 @@ Lebanese Payroll Rules.
     'author': "Azkatech",
     'website': "http://www.azka.tech",
     'data': [
-        'data/res_partner.xml',
+#         'data/res_partner.xml',
         'data/hr_payroll_structure_type.xml',
         'data/hr_payroll_structure.xml',
         'data/hr_payslip_input_type.xml',
